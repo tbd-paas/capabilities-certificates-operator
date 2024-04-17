@@ -1,0 +1,100 @@
+commonOverlays:
+  - name: "add namespace markers"
+    query:
+      - metadata.namespace
+      - subjects[*].namespace
+      - "webhooks[*].clientConfig.service.namespace"
+    value: "{{ .defaultNamespace }}"  # +operator-builder:field:name=namespace,default="{{ .defaultNamespace }}",type=string
+
+yamlFiles:
+  - name: "cert-manager crds"
+    path: "../vendor/crds.yaml"
+    outputPath: "manifests/crds.yaml"
+
+  - name: "cert-manager cainjector deployment"
+    path: "../vendor/deployment.yaml"
+    outputPath: "manifests/deployment.yaml"
+    overlays:
+      - name: "add cainjector replica count marker"
+        query: "$[?($.metadata.name == 'cert-manager-cainjector')]"
+        value:
+          spec:
+            # +operator-builder:field:name=certManager.injector.replicas,default="%v",type=int,description=`
+            # Number of replicas to use for the cert-manager cainjector deployment.`
+            replicas: !!int "%v"
+
+      - name: "add cainjector image name markers"
+        documentQuery:
+          - conditions:
+            - query: $[?($.metadata.name == "cert-manager-cainjector")]
+        query: "spec.template.spec.containers[?(@.name == 'cert-manager')]"
+        value:
+          # +operator-builder:field:name=certManager.injector.image,default="%v",type=string,description=`
+          # Image to use for cert-manager cainjector deployment.`
+          image: "%v"
+
+  - name: "cert-manager controller deployment"
+    path: "../vendor/deployment.yaml"
+    outputPath: "manifests/deployment.yaml"
+    overlays:
+      - name: "add controller replica count marker"
+        query: "$[?($.metadata.name == 'cert-manager')]"
+        value:
+          spec:
+            # +operator-builder:field:name=certManager.controller.replicas,default="%v",type=int,description=`
+            # Number of replicas to use for the cert-manager controller deployment.`
+            replicas: !!int "%v"
+
+      - name: "add controller image name markers"
+        documentQuery:
+          - conditions:
+            - query: $[?($.metadata.name == "cert-manager")]
+        query: "spec.template.spec.containers[?(@.name == 'cert-manager')]"
+        value:
+          # +operator-builder:field:name=certManager.controller.image,default="%v",type=string,description=`
+          # Image to use for cert-manager controller deployment.`
+          image: "%v"
+
+  - name: "cert-manager webhook deployment"
+    path: "../vendor/deployment.yaml"
+    outputPath: "manifests/deployment.yaml"
+    overlays:
+      - name: "add webhook replica count marker"
+        query: "$[?($.metadata.name == 'cert-manager-webhook')]"
+        value:
+          spec:
+            # +operator-builder:field:name=certManager.webhook.replicas,default="%v",type=int,description=`
+            # Number of replicas to use for the cert-manager webhook deployment.`
+            replicas: !!int "%v"
+
+      - name: "add webhook image name markers"
+        documentQuery:
+          - conditions:
+            - query: $[?($.metadata.name == "cert-manager-webhook")]
+        query: "spec.template.spec.containers[?(@.name == 'cert-manager')]"
+        value:
+          # +operator-builder:field:name=certManager.webhook.image,default="%v",type=string,description=`
+          # Image to use for cert-manager webhook deployment.`
+          image: "%v"
+
+  - name: "cert-manager rbac"
+    path: "../vendor/rbac.yaml"
+    outputPath: "manifests/rbac.yaml"
+
+  - name: "cert-manager service"
+    path: "../vendor/service.yaml"
+    outputPath: "manifests/service.yaml"
+
+  - name: "cert-manager webhook"
+    path: "../vendor/webhook.yaml"
+    outputPath: "manifests/webhook.yaml"
+    overlays:
+      - name: "set namespace in CA reference annotation"
+        query: "metadata.annotations"
+        value:
+          # +operator-builder:field:name=namespace,type=string,replace="certs-namespace"
+          cert-manager.io/inject-ca-from-secret: certs-namespace/cert-manager-webhook-ca
+
+  - name: "cert-manager cluster issuer"
+    path: "../static/issuer-internal.yaml"
+    outputPath: "manifests/issuer-internal.yaml"

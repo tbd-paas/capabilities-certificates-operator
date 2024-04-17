@@ -1,0 +1,37 @@
+---
+apiVersion: capabilities.platform.tbd.io/v1alpha1
+kind: CertificatesCapability
+metadata:
+  name: config
+spec:
+  namespace: tbd-certificates-system
+  certManager:
+    injector:
+      image: "quay.io/jetstack/cert-manager-cainjector:v1.14.4"
+      replicas: 1
+      resources:
+        requests:
+          cpu: 50m
+          memory: 64Mi
+        limits:
+          memory: 128Mi
+    controller:
+      image: "quay.io/jetstack/cert-manager:v1.14.4"
+      replicas: 1
+      resources:
+        requests:
+          cpu: 25m
+          memory: 32Mi
+        limits:
+          memory: 64Mi
+    webhook:
+      image: "quay.io/jetstack/cert-manager-webhook:v1.14.4"
+      replicas: 1
+      resources:
+        requests:
+          cpu: 25m
+          memory: 32Mi
+        limits:
+          memory: 64Mi
+  trustManager:
+    image: "registry/repo/trust-manager:latest"

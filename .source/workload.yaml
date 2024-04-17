@@ -1,0 +1,20 @@
+kind: StandaloneWorkload
+name: capabilities-certificates
+spec:
+  api:
+    clusterScoped: true
+    domain: platform.tbd.io
+    group: capabilities
+    kind: CertificatesCapability
+    version: v1alpha1
+  companionCliSubcmd:
+    description: Manage the certificates capability
+    name: certificates
+  dependencies: []
+  resources:
+    - cert-manager/manifests/crds.yaml
+    - cert-manager/manifests/deployment.yaml
+    - cert-manager/manifests/issuer.yaml
+    - cert-manager/manifests/rbac.yaml
+    - cert-manager/manifests/service.yaml
+    - cert-manager/manifests/webhook.yaml

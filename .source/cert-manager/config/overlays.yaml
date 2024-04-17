@@ -27,11 +27,23 @@ yamlFiles:
         documentQuery:
           - conditions:
             - query: $[?($.metadata.name == "cert-manager-cainjector")]
-        query: "spec.template.spec.containers[?(@.name == 'cert-manager')]"
+        query: "spec.template.spec.containers[?(@.name == 'cert-manager-cainjector')]"
         value:
           # +operator-builder:field:name=certManager.injector.image,default="%v",type=string,description=`
-          # Image to use for cert-manager cainjector deployment.`
+          # Image to use for cert-manager CA injector deployment.`
           image: "%v"
+          resources:
+            requests:
+              # +operator-builder:field:name=certManager.injector.resources.requests.cpu,default="%v",type=string,description=`
+              # CPU requests to use for cert-manager CA injector deployment.`
+              cpu: "%v"
+              # +operator-builder:field:name=certManager.injector.resources.requests.memory,default="%v",type=string,description=`
+              # Memory requests to use for cert-manager CA injector deployment.`
+              memory: "%v"
+            limits:
+              # +operator-builder:field:name=certManager.injector.resources.limits.memory,default="%v",type=string,description=`
+              # Memory limits to use for cert-manager CA injector deployment.`
+              memory: "%v"
 
   - name: "cert-manager controller deployment"
     path: "../vendor/deployment.yaml"
@@ -49,11 +61,23 @@ yamlFiles:
         documentQuery:
           - conditions:
             - query: $[?($.metadata.name == "cert-manager")]
-        query: "spec.template.spec.containers[?(@.name == 'cert-manager')]"
+        query: "spec.template.spec.containers[?(@.name == 'cert-manager-controller')]"
         value:
           # +operator-builder:field:name=certManager.controller.image,default="%v",type=string,description=`
           # Image to use for cert-manager controller deployment.`
           image: "%v"
+          resources:
+            requests:
+              # +operator-builder:field:name=certManager.controller.resources.requests.cpu,default="%v",type=string,description=`
+              # CPU requests to use for cert-manager controller deployment.`
+              cpu: "%v"
+              # +operator-builder:field:name=certManager.controller.resources.requests.memory,default="%v",type=string,description=`
+              # Memory requests to use for cert-manager controller deployment.`
+              memory: "%v"
+            limits:
+              # +operator-builder:field:name=certManager.controller.resources.limits.memory,default="%v",type=string,description=`
+              # Memory limits to use for cert-manager controller deployment.`
+              memory: "%v"
 
   - name: "cert-manager webhook deployment"
     path: "../vendor/deployment.yaml"
@@ -71,11 +95,23 @@ yamlFiles:
         documentQuery:
           - conditions:
             - query: $[?($.metadata.name == "cert-manager-webhook")]
-        query: "spec.template.spec.containers[?(@.name == 'cert-manager')]"
+        query: "spec.template.spec.containers[?(@.name == 'cert-manager-webhook')]"
         value:
           # +operator-builder:field:name=certManager.webhook.image,default="%v",type=string,description=`
           # Image to use for cert-manager webhook deployment.`
           image: "%v"
+          resources:
+            requests:
+              # +operator-builder:field:name=certManager.webhook.resources.requests.cpu,default="%v",type=string,description=`
+              # CPU requests to use for cert-manager webhook deployment.`
+              cpu: "%v"
+              # +operator-builder:field:name=certManager.webhook.resources.requests.memory,default="%v",type=string,description=`
+              # Memory requests to use for cert-manager webhook deployment.`
+              memory: "%v"
+            limits:
+              # +operator-builder:field:name=certManager.webhook.resources.limits.memory,default="%v",type=string,description=`
+              # Memory limits to use for cert-manager webhook deployment.`
+              memory: "%v"
 
   - name: "cert-manager rbac"
     path: "../vendor/rbac.yaml"

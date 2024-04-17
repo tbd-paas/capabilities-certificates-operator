@@ -1,0 +1,11 @@
+apiVersion: vendir.k14s.io/v1alpha1
+directories:
+- contents:
+  - git:
+      commitTitle: 'Merge pull request #23 from scottd018/cert-manager-v1144...'
+      sha: 633b91a27903b94bcf9442e9313a383f80f0c5b0
+      tags:
+      - v0.1.5-3-g633b91a
+    path: .
+  path: cert-manager/vendor
+kind: LockConfig

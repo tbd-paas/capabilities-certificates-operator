@@ -1,0 +1,27 @@
+# permissions for end users to view certificatescapabilities.
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  labels:
+    app.kubernetes.io/name: clusterrole
+    app.kubernetes.io/instance: certificatescapability-viewer-role
+    app.kubernetes.io/component: rbac
+    app.kubernetes.io/created-by: capabilities-certificates-operator
+    app.kubernetes.io/part-of: capabilities-certificates-operator
+    app.kubernetes.io/managed-by: kustomize
+  name: certificatescapability-viewer-role
+rules:
+- apiGroups:
+  - capabilities.platform.tbd.io
+  resources:
+  - certificatescapabilities
+  verbs:
+  - get
+  - list
+  - watch
+- apiGroups:
+  - capabilities.platform.tbd.io
+  resources:
+  - certificatescapabilities/status
+  verbs:
+  - get

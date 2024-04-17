@@ -1,6 +1,2 @@
 ---
-defaultCainjectorImage: quay.io/jetstack/cert-manager-cainjector
-defaultControllerImage: quay.io/jetstack/cert-manager-controller
-defaultWebhookImage: quay.io/jetstack/cert-manager-webhook
-defaultVersion: v1.14.4
 defaultNamespace: tbd-certificates-system

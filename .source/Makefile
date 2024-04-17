@@ -14,21 +14,39 @@ CREATE_OPTS=create api \
 	--controller \
 	--resource
 
+MANAGED_ASSETS=../config/install \
+	../README.md \
+	../Makefile \
+	../Dockerfile \
+	../go.mod
+
 # preserve manually mananged assets
 preserve:
-	cp -R ../config/install assets/
-	cp ../README.md assets/
-	cp ../Makefile assets/
-	cp ../Dockerfile assets/
-	cp ../go.mod assets/
+	@mkdir -p assets; \
+	for ASSET in $(MANAGED_ASSETS); do \
+		if [ -f $$ASSET ]; then \
+			echo "preserving file $$ASSET"; \
+			cp -R $$ASSET asset; \
+		elif [ -d $$ASSET ]; then \
+			mkdir -p assets/$$ASSET; \
+			echo "preserving directory $$ASSET"; \
+			cp -R $$ASSET/* asset/$$ASSET; \
+		else \
+			echo "not preserving non-existing asset $$ASSET"; \
+		fi \
+	done
 
 # restore manually managed assets
 restore:
-	cp -R assets/install ../config
-	cp assets/README.md ../
-	cp assets/Makefile ../
-	cp assets/Dockerfile ../
-	cp assets/go.mod ../
+	@for ASSET in $(MANAGED_ASSETS); do \
+		ASSET=`echo $$ASSET | sed 's/\.\.\///g'`; \
+		if [ -e assets/$$ASSET ]; then \
+			echo "restoring asset $$ASSET"; \
+			cp -R assets/$$ASSET ..; \
+		else \
+			echo "not restoring non-existing asset $$ASSET"; \
+		fi \
+	done
 
 operator-clean: preserve
 	rm -rf ../*

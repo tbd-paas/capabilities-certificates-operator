@@ -19,19 +19,23 @@ MANAGED_ASSETS=../config/install \
 	../Makefile \
 	../Dockerfile \
 	../go.mod \
-	../controllers/phases
+	../controllers/capabilities/certificatescapability_phases.go \
+	../phases \
+	../.gitignore
 
 # preserve manually mananged assets
 preserve:
 	@mkdir -p assets; \
 	for ASSET in $(MANAGED_ASSETS); do \
+		DEST=`echo $$ASSET | sed 's/\.\.\///g'`; \
 		if [ -f $$ASSET ]; then \
 			echo "preserving file $$ASSET"; \
-			cp -R $$ASSET assets/; \
+			DIR=`dirname $$DEST`; \
+			mkdir -p assets/$$DIR; \
+			cp -R $$ASSET assets/$$DEST; \
 		elif [ -d $$ASSET ]; then \
 			echo "preserving directory $$ASSET"; \
-			DEST=`echo $$ASSET | sed 's/\.\.\///g'`; \
-			mkdir -p assets/$$ASSET; \
+			mkdir -p assets/$$DEST; \
 			cp -R $$ASSET/* assets/$$DEST; \
 		else \
 			echo "not preserving non-existing asset $$ASSET"; \
@@ -40,15 +44,7 @@ preserve:
 
 # restore manually managed assets
 restore:
-	@for ASSET in $(MANAGED_ASSETS); do \
-		ASSET=`echo $$ASSET | sed 's/\.\.\///g'`; \
-		if [ -e assets/$$ASSET ]; then \
-			echo "restoring asset $$ASSET"; \
-			cp -R assets/$$ASSET ..; \
-		else \
-			echo "not restoring non-existing asset $$ASSET"; \
-		fi \
-	done
+	@cp -R assets/* ..
 
 operator-clean: preserve
 	rm -rf ../*

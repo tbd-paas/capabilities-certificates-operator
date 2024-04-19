@@ -18,7 +18,8 @@ MANAGED_ASSETS=../config/install \
 	../README.md \
 	../Makefile \
 	../Dockerfile \
-	../go.mod
+	../go.mod \
+	../controllers/phases
 
 # preserve manually mananged assets
 preserve:
@@ -28,9 +29,10 @@ preserve:
 			echo "preserving file $$ASSET"; \
 			cp -R $$ASSET assets/; \
 		elif [ -d $$ASSET ]; then \
-			mkdir -p assets/$$ASSET; \
 			echo "preserving directory $$ASSET"; \
-			cp -R $$ASSET/* assets/$$ASSET; \
+			DEST=`echo $$ASSET | sed 's/\.\.\///g'`; \
+			mkdir -p assets/$$ASSET; \
+			cp -R $$ASSET/* assets/$$DEST; \
 		else \
 			echo "not preserving non-existing asset $$ASSET"; \
 		fi \

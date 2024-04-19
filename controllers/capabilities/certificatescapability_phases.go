@@ -21,6 +21,8 @@ import (
 
 	"github.com/nukleros/operator-builder-tools/pkg/controller/phases"
 	ctrl "sigs.k8s.io/controller-runtime"
+
+	localphases "github.com/tbd-paas/capabilities-certificates-operator/phases"
 )
 
 // InitializePhases defines what phases should be run for each event loop. phases are executed
@@ -36,8 +38,9 @@ func (r *CertificatesCapabilityReconciler) InitializePhases() {
 
 	r.Phases.Register(
 		"Create-Resources",
-		phases.CreateResourcesPhase,
+		localphases.CreateResourcesPhase,
 		phases.CreateEvent,
+		phases.WithCustomRequeueResult(ctrl.Result{RequeueAfter: 5 * time.Second}),
 	)
 
 	r.Phases.Register(

@@ -29,6 +29,7 @@ import (
 	ctrl "sigs.k8s.io/controller-runtime"
 	"sigs.k8s.io/controller-runtime/pkg/client"
 	"sigs.k8s.io/controller-runtime/pkg/controller"
+	"sigs.k8s.io/controller-runtime/pkg/manager"
 
 	capabilitiesv1alpha1 "github.com/tbd-paas/capabilities-certificates-operator/apis/capabilities/v1alpha1"
 	"github.com/tbd-paas/capabilities-certificates-operator/apis/capabilities/v1alpha1/capabilitiescertificates"
@@ -46,6 +47,7 @@ type CertificatesCapabilityReconciler struct {
 	FieldManager string
 	Watches      []client.Object
 	Phases       *phases.Registry
+	Manager      manager.Manager
 }
 
 func NewCertificatesCapabilityReconciler(mgr ctrl.Manager) *CertificatesCapabilityReconciler {
@@ -57,17 +59,12 @@ func NewCertificatesCapabilityReconciler(mgr ctrl.Manager) *CertificatesCapabili
 		Log:          ctrl.Log.WithName("controllers").WithName("capabilities").WithName("CertificatesCapability"),
 		Watches:      []client.Object{},
 		Phases:       &phases.Registry{},
+		Manager:      mgr,
 	}
 }
 
 // +kubebuilder:rbac:groups=capabilities.platform.tbd.io,resources=certificatescapabilities,verbs=get;list;watch;create;update;patch;delete
 // +kubebuilder:rbac:groups=capabilities.platform.tbd.io,resources=certificatescapabilities/status,verbs=get;update;patch
-
-// Until Webhooks are implemented we need to list and watch namespaces to ensure
-// they are available before deploying resources,
-// See:
-//   - https://github.com/vmware-tanzu-labs/operator-builder/issues/141
-//   - https://github.com/vmware-tanzu-labs/operator-builder/issues/162
 
 // +kubebuilder:rbac:groups=core,resources=namespaces,verbs=list;watch
 
@@ -158,6 +155,11 @@ func (r *CertificatesCapabilityReconciler) GetName() string {
 // GetController returns the controller object associated with the reconciler.
 func (r *CertificatesCapabilityReconciler) GetController() controller.Controller {
 	return r.Controller
+}
+
+// GetManager returns the manager object assocated with the reconciler.
+func (r *CertificatesCapabilityReconciler) GetManager() manager.Manager {
+	return r.Manager
 }
 
 // GetWatches returns the objects which are current being watched by the reconciler.

@@ -36,7 +36,8 @@ type CertificatesCapabilitySpec struct {
 	// Important: Run "make" to regenerate code after modifying this file
 
 	// +kubebuilder:validation:Required
-	//  Namespace to use where underlying certificates capability will be deployed.
+	//
+	//	Namespace to use where underlying certificates capability will be deployed.
 	Namespace string `json:"namespace,omitempty"`
 
 	// +kubebuilder:validation:Optional
@@ -58,13 +59,15 @@ type CertificatesCapabilitySpecCertManagerInjector struct {
 	// +kubebuilder:default=2
 	// +kubebuilder:validation:Optional
 	// (Default: 2)
-	//  Number of replicas to use for the cert-manager cainjector deployment.
+	//
+	//	Number of replicas to use for the cert-manager cainjector deployment.
 	Replicas int `json:"replicas,omitempty"`
 
 	// +kubebuilder:default="quay.io/jetstack/cert-manager-cainjector:v1.14.4"
 	// +kubebuilder:validation:Optional
 	// (Default: "quay.io/jetstack/cert-manager-cainjector:v1.14.4")
-	//  Image to use for cert-manager CA injector deployment.
+	//
+	//	Image to use for cert-manager CA injector deployment.
 	Image string `json:"image,omitempty"`
 
 	// +kubebuilder:validation:Optional
@@ -83,13 +86,15 @@ type CertificatesCapabilitySpecCertManagerInjectorResourcesRequests struct {
 	// +kubebuilder:default="50m"
 	// +kubebuilder:validation:Optional
 	// (Default: "50m")
-	//  CPU requests to use for cert-manager CA injector deployment.
+	//
+	//	CPU requests to use for cert-manager CA injector deployment.
 	Cpu string `json:"cpu,omitempty"`
 
 	// +kubebuilder:default="64Mi"
 	// +kubebuilder:validation:Optional
 	// (Default: "64Mi")
-	//  Memory requests to use for cert-manager CA injector deployment.
+	//
+	//	Memory requests to use for cert-manager CA injector deployment.
 	Memory string `json:"memory,omitempty"`
 }
 
@@ -97,7 +102,8 @@ type CertificatesCapabilitySpecCertManagerInjectorResourcesLimits struct {
 	// +kubebuilder:default="128Mi"
 	// +kubebuilder:validation:Optional
 	// (Default: "128Mi")
-	//  Memory limits to use for cert-manager CA injector deployment.
+	//
+	//	Memory limits to use for cert-manager CA injector deployment.
 	Memory string `json:"memory,omitempty"`
 }
 
@@ -105,13 +111,15 @@ type CertificatesCapabilitySpecCertManagerController struct {
 	// +kubebuilder:default=2
 	// +kubebuilder:validation:Optional
 	// (Default: 2)
-	//  Number of replicas to use for the cert-manager controller deployment.
+	//
+	//	Number of replicas to use for the cert-manager controller deployment.
 	Replicas int `json:"replicas,omitempty"`
 
 	// +kubebuilder:default="quay.io/jetstack/cert-manager-controller:v1.14.4"
 	// +kubebuilder:validation:Optional
 	// (Default: "quay.io/jetstack/cert-manager-controller:v1.14.4")
-	//  Image to use for cert-manager controller deployment.
+	//
+	//	Image to use for cert-manager controller deployment.
 	Image string `json:"image,omitempty"`
 
 	// +kubebuilder:validation:Optional
@@ -130,13 +138,15 @@ type CertificatesCapabilitySpecCertManagerControllerResourcesRequests struct {
 	// +kubebuilder:default="25m"
 	// +kubebuilder:validation:Optional
 	// (Default: "25m")
-	//  CPU requests to use for cert-manager controller deployment.
+	//
+	//	CPU requests to use for cert-manager controller deployment.
 	Cpu string `json:"cpu,omitempty"`
 
 	// +kubebuilder:default="32Mi"
 	// +kubebuilder:validation:Optional
 	// (Default: "32Mi")
-	//  Memory requests to use for cert-manager controller deployment.
+	//
+	//	Memory requests to use for cert-manager controller deployment.
 	Memory string `json:"memory,omitempty"`
 }
 
@@ -144,7 +154,8 @@ type CertificatesCapabilitySpecCertManagerControllerResourcesLimits struct {
 	// +kubebuilder:default="64Mi"
 	// +kubebuilder:validation:Optional
 	// (Default: "64Mi")
-	//  Memory limits to use for cert-manager controller deployment.
+	//
+	//	Memory limits to use for cert-manager controller deployment.
 	Memory string `json:"memory,omitempty"`
 }
 
@@ -152,13 +163,15 @@ type CertificatesCapabilitySpecCertManagerWebhook struct {
 	// +kubebuilder:default=2
 	// +kubebuilder:validation:Optional
 	// (Default: 2)
-	//  Number of replicas to use for the cert-manager webhook deployment.
+	//
+	//	Number of replicas to use for the cert-manager webhook deployment.
 	Replicas int `json:"replicas,omitempty"`
 
 	// +kubebuilder:default="quay.io/jetstack/cert-manager-webhook:v1.14.4"
 	// +kubebuilder:validation:Optional
 	// (Default: "quay.io/jetstack/cert-manager-webhook:v1.14.4")
-	//  Image to use for cert-manager webhook deployment.
+	//
+	//	Image to use for cert-manager webhook deployment.
 	Image string `json:"image,omitempty"`
 
 	// +kubebuilder:validation:Optional
@@ -177,13 +190,15 @@ type CertificatesCapabilitySpecCertManagerWebhookResourcesRequests struct {
 	// +kubebuilder:default="25m"
 	// +kubebuilder:validation:Optional
 	// (Default: "25m")
-	//  CPU requests to use for cert-manager webhook deployment.
+	//
+	//	CPU requests to use for cert-manager webhook deployment.
 	Cpu string `json:"cpu,omitempty"`
 
 	// +kubebuilder:default="32Mi"
 	// +kubebuilder:validation:Optional
 	// (Default: "32Mi")
-	//  Memory requests to use for cert-manager webhook deployment.
+	//
+	//	Memory requests to use for cert-manager webhook deployment.
 	Memory string `json:"memory,omitempty"`
 }
 
@@ -191,7 +206,8 @@ type CertificatesCapabilitySpecCertManagerWebhookResourcesLimits struct {
 	// +kubebuilder:default="64Mi"
 	// +kubebuilder:validation:Optional
 	// (Default: "64Mi")
-	//  Memory limits to use for cert-manager webhook deployment.
+	//
+	//	Memory limits to use for cert-manager webhook deployment.
 	Memory string `json:"memory,omitempty"`
 }
 

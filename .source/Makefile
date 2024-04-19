@@ -26,11 +26,11 @@ preserve:
 	for ASSET in $(MANAGED_ASSETS); do \
 		if [ -f $$ASSET ]; then \
 			echo "preserving file $$ASSET"; \
-			cp -R $$ASSET asset; \
+			cp -R $$ASSET assets/; \
 		elif [ -d $$ASSET ]; then \
 			mkdir -p assets/$$ASSET; \
 			echo "preserving directory $$ASSET"; \
-			cp -R $$ASSET/* asset/$$ASSET; \
+			cp -R $$ASSET/* assets/$$ASSET; \
 		else \
 			echo "not preserving non-existing asset $$ASSET"; \
 		fi \

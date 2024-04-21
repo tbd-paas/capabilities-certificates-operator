@@ -13,8 +13,8 @@ spec:
   resources:
     - namespace.yaml
     - cert-manager/manifests/crds.yaml
-    - cert-manager/manifests/deployment.yaml
     - cert-manager/manifests/rbac.yaml
+    - cert-manager/manifests/deployment.yaml
     - cert-manager/manifests/service.yaml
     - cert-manager/manifests/webhook.yaml
     - cert-manager/manifests/issuer-internal.yaml

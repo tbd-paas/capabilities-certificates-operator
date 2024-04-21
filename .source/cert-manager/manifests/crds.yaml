@@ -8,8 +8,11 @@ metadata:
     app.kubernetes.io/name: cert-manager
     app.kubernetes.io/instance: cert-manager
     app.kubernetes.io/version: v1.14.4
-    platform.nukleros.io/category: certificates
-    platform.nukleros.io/project: cert-manager
+    capabilities.tbd.io/capability: certificates
+    capabilities.tbd.io/version: v0.0.1
+    capabilities.tbd.io/platform-version: unstable
+    app.kubernetes.io/part-of: platform
+    app.kubernetes.io/managed-by: certificates-operator
 spec:
   group: cert-manager.io
   names:
@@ -206,8 +209,11 @@ metadata:
     app.kubernetes.io/name: cert-manager
     app.kubernetes.io/instance: cert-manager
     app.kubernetes.io/version: v1.14.4
-    platform.nukleros.io/category: certificates
-    platform.nukleros.io/project: cert-manager
+    capabilities.tbd.io/capability: certificates
+    capabilities.tbd.io/version: v0.0.1
+    capabilities.tbd.io/platform-version: unstable
+    app.kubernetes.io/part-of: platform
+    app.kubernetes.io/managed-by: certificates-operator
 spec:
   group: cert-manager.io
   names:
@@ -651,8 +657,11 @@ metadata:
     app.kubernetes.io/name: cert-manager
     app.kubernetes.io/instance: cert-manager
     app.kubernetes.io/version: v1.14.4
-    platform.nukleros.io/category: certificates
-    platform.nukleros.io/project: cert-manager
+    capabilities.tbd.io/capability: certificates
+    capabilities.tbd.io/version: v0.0.1
+    capabilities.tbd.io/platform-version: unstable
+    app.kubernetes.io/part-of: platform
+    app.kubernetes.io/managed-by: certificates-operator
 spec:
   group: acme.cert-manager.io
   names:
@@ -1777,8 +1786,11 @@ metadata:
     app.kubernetes.io/name: cert-manager
     app.kubernetes.io/instance: cert-manager
     app.kubernetes.io/version: v1.14.4
-    platform.nukleros.io/category: certificates
-    platform.nukleros.io/project: cert-manager
+    capabilities.tbd.io/capability: certificates
+    capabilities.tbd.io/version: v0.0.1
+    capabilities.tbd.io/platform-version: unstable
+    app.kubernetes.io/part-of: platform
+    app.kubernetes.io/managed-by: certificates-operator
 spec:
   group: cert-manager.io
   names:
@@ -3150,8 +3162,11 @@ metadata:
     app.kubernetes.io/name: cert-manager
     app.kubernetes.io/instance: cert-manager
     app.kubernetes.io/version: v1.14.4
-    platform.nukleros.io/category: certificates
-    platform.nukleros.io/project: cert-manager
+    capabilities.tbd.io/capability: certificates
+    capabilities.tbd.io/version: v0.0.1
+    capabilities.tbd.io/platform-version: unstable
+    app.kubernetes.io/part-of: platform
+    app.kubernetes.io/managed-by: certificates-operator
 spec:
   group: cert-manager.io
   names:
@@ -4523,8 +4538,11 @@ metadata:
     app.kubernetes.io/name: cert-manager
     app.kubernetes.io/instance: cert-manager
     app.kubernetes.io/version: v1.14.4
-    platform.nukleros.io/category: certificates
-    platform.nukleros.io/project: cert-manager
+    capabilities.tbd.io/capability: certificates
+    capabilities.tbd.io/version: v0.0.1
+    capabilities.tbd.io/platform-version: unstable
+    app.kubernetes.io/part-of: platform
+    app.kubernetes.io/managed-by: certificates-operator
 spec:
   group: acme.cert-manager.io
   names:

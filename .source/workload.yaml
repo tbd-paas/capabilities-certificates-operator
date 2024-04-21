@@ -16,5 +16,5 @@ spec:
     - cert-manager/manifests/rbac.yaml
     - cert-manager/manifests/deployment.yaml
     - cert-manager/manifests/service.yaml
-    - cert-manager/manifests/webhook.yaml
     - cert-manager/manifests/issuer-internal.yaml
+    - cert-manager/manifests/webhook.yaml

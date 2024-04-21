@@ -170,9 +170,9 @@ var CreateFuncs = []func(
 	CreateDeploymentNamespaceCertManagerWebhook,
 	CreateServiceNamespaceCertManager,
 	CreateServiceNamespaceCertManagerWebhook,
+	CreateClusterIssuerInternal,
 	CreateMutatingWebhookCertManagerWebhook,
 	CreateValidatingWebhookCertManagerWebhook,
-	CreateClusterIssuerInternal,
 }
 
 // InitFuncs is an array of functions that are called prior to starting the controller manager.  This is

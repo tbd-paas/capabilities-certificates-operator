@@ -42,13 +42,16 @@ func CreateMutatingWebhookCertManagerWebhook(
 			"metadata": map[string]interface{}{
 				"name": "cert-manager-webhook",
 				"labels": map[string]interface{}{
-					"app":                           "webhook",
-					"app.kubernetes.io/name":        "webhook",
-					"app.kubernetes.io/instance":    "cert-manager",
-					"app.kubernetes.io/component":   "webhook",
-					"app.kubernetes.io/version":     "v1.14.4",
-					"platform.nukleros.io/category": "certificates",
-					"platform.nukleros.io/project":  "cert-manager",
+					"app":                                  "webhook",
+					"app.kubernetes.io/name":               "webhook",
+					"app.kubernetes.io/instance":           "cert-manager",
+					"app.kubernetes.io/component":          "webhook",
+					"app.kubernetes.io/version":            "v1.14.4",
+					"capabilities.tbd.io/capability":       "certificates",
+					"capabilities.tbd.io/version":          "v0.0.1",
+					"capabilities.tbd.io/platform-version": "unstable",
+					"app.kubernetes.io/part-of":            "platform",
+					"app.kubernetes.io/managed-by":         "certificates-operator",
 				},
 				"annotations": map[string]interface{}{
 					// controlled by field: namespace
@@ -112,13 +115,16 @@ func CreateValidatingWebhookCertManagerWebhook(
 			"metadata": map[string]interface{}{
 				"name": "cert-manager-webhook",
 				"labels": map[string]interface{}{
-					"app":                           "webhook",
-					"app.kubernetes.io/name":        "webhook",
-					"app.kubernetes.io/instance":    "cert-manager",
-					"app.kubernetes.io/component":   "webhook",
-					"app.kubernetes.io/version":     "v1.14.4",
-					"platform.nukleros.io/category": "certificates",
-					"platform.nukleros.io/project":  "cert-manager",
+					"app":                                  "webhook",
+					"app.kubernetes.io/name":               "webhook",
+					"app.kubernetes.io/instance":           "cert-manager",
+					"app.kubernetes.io/component":          "webhook",
+					"app.kubernetes.io/version":            "v1.14.4",
+					"capabilities.tbd.io/capability":       "certificates",
+					"capabilities.tbd.io/version":          "v0.0.1",
+					"capabilities.tbd.io/platform-version": "unstable",
+					"app.kubernetes.io/part-of":            "platform",
+					"app.kubernetes.io/managed-by":         "certificates-operator",
 				},
 				"annotations": map[string]interface{}{
 					// controlled by field: namespace

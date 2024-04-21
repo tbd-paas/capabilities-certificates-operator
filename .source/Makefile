@@ -12,7 +12,8 @@ INIT_OPTS=init \
 CREATE_OPTS=create api \
 	--workload-config .source/workload.yaml \
 	--controller \
-	--resource
+	--resource \
+	--force
 
 MANAGED_ASSETS=../config/install \
 	../README.md \

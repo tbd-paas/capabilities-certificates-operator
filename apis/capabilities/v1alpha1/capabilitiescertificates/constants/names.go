@@ -64,7 +64,7 @@ const (
 	DeploymentNamespaceCertManagerWebhook                             = "cert-manager-webhook"
 	ServiceNamespaceCertManager                                       = "cert-manager"
 	ServiceNamespaceCertManagerWebhook                                = "cert-manager-webhook"
+	ClusterIssuerInternal                                             = "internal"
 	MutatingWebhookCertManagerWebhook                                 = "cert-manager-webhook"
 	ValidatingWebhookCertManagerWebhook                               = "cert-manager-webhook"
-	ClusterIssuerInternal                                             = "internal"
 )

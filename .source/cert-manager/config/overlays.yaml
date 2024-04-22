@@ -160,6 +160,17 @@ yamlFiles:
   - name: "cert-manager rbac"
     path: "../vendor/rbac.yaml"
     outputPath: "manifests/rbac.yaml"
+    overlays:
+      - name: "add identity as an arbitrary marker"
+        documentQuery:
+          - conditions:
+              - query: $[?($.metadata.name == "cert-manager")]
+              - query: $[?($.kind == "ServiceAccount")]
+        query: metadata.name
+        value:
+          # +operator-builder:field:name=aws.roleARN,arbitrary,default="",type=string,description=`
+          # The AWS IAM Role ARN to use for validating public DNS records for issuing public certificates.` 
+          "%v"
 
   - name: "cert-manager service"
     path: "../vendor/service.yaml"

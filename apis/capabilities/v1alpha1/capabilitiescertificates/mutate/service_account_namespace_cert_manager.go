@@ -36,6 +36,24 @@ func MutateServiceAccountNamespaceCertManager(
 	}
 
 	// mutation logic goes here
+	if parent.Spec.Aws.RoleARN != "" {
+		current := original.GetAnnotations()
+
+		switch {
+		case current == nil:
+			original.SetAnnotations(
+				map[string]string{"eks.amazonaws.com/role-arn": parent.Spec.Aws.RoleARN},
+			)
+		case len(current) < 1:
+			original.SetAnnotations(
+				map[string]string{"eks.amazonaws.com/role-arn": parent.Spec.Aws.RoleARN},
+			)
+		default:
+			current["eks.amazonaws.com/role-arn"] = parent.Spec.Aws.RoleARN
+
+			original.SetAnnotations(current)
+		}
+	}
 
 	return []client.Object{original}, nil
 }

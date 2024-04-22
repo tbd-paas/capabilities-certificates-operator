@@ -77,7 +77,9 @@ func CreateServiceAccountNamespaceCertManager(
 			"kind":                         "ServiceAccount",
 			"automountServiceAccountToken": true,
 			"metadata": map[string]interface{}{
-				"name":      "cert-manager",
+				"name": "cert-manager",
+				// controlled by field: aws.roleARN
+				//  The AWS IAM Role ARN to use for validating public DNS records for issuing public certificates.
 				"namespace": parent.Spec.Namespace, //  controlled by field: namespace
 				"labels": map[string]interface{}{
 					"app":                                  "cert-manager",

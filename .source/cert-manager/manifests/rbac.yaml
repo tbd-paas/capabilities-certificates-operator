@@ -22,6 +22,8 @@ kind: ServiceAccount
 automountServiceAccountToken: true
 metadata:
   name: cert-manager
+  # +operator-builder:field:name=aws.roleARN,arbitrary,default="",type=string,description=`
+  # The AWS IAM Role ARN to use for validating public DNS records for issuing public certificates.` 
   namespace: tbd-certificates-system # +operator-builder:field:name=namespace,default="tbd-certificates-system",type=string
   labels:
     app: cert-manager

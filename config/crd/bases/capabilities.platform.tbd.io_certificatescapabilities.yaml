@@ -40,6 +40,14 @@ spec:
           spec:
             description: CertificatesCapabilitySpec defines the desired state of CertificatesCapability.
             properties:
+              aws:
+                properties:
+                  roleARN:
+                    default: ""
+                    description: "(Default: \"\")\n\n\n\tThe AWS IAM Role ARN to use
+                      for validating public DNS records for issuing public certificates."
+                    type: string
+                type: object
               certManager:
                 properties:
                   controller:

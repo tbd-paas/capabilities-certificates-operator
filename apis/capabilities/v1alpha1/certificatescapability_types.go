@@ -41,7 +41,19 @@ type CertificatesCapabilitySpec struct {
 	Namespace string `json:"namespace,omitempty"`
 
 	// +kubebuilder:validation:Optional
+	Aws CertificatesCapabilitySpecAws `json:"aws,omitempty"`
+
+	// +kubebuilder:validation:Optional
 	CertManager CertificatesCapabilitySpecCertManager `json:"certManager,omitempty"`
+}
+
+type CertificatesCapabilitySpecAws struct {
+	// +kubebuilder:default=""
+	// +kubebuilder:validation:Optional
+	// (Default: "")
+	//
+	//	The AWS IAM Role ARN to use for validating public DNS records for issuing public certificates.
+	RoleARN string `json:"roleARN,omitempty"`
 }
 
 type CertificatesCapabilitySpecCertManager struct {

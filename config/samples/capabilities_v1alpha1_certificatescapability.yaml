@@ -4,6 +4,8 @@ metadata:
   name: certificatescapability-sample
 spec:
   namespace: "tbd-certificates-system"
+  aws:
+    roleARN: "thisisatest"
   certManager:
     injector:
       replicas: 2

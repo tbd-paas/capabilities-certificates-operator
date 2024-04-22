@@ -39,7 +39,7 @@ func (r *CertificatesCapabilityReconciler) InitializePhases() {
 		phases.CreateResourcesPhase,
 		phases.CreateEvent,
 		phases.WithCustomRequeueResult(ctrl.Result{RequeueAfter: 5 * time.Second}),
-		phases.WithResourceOptions(phases.ResorceOptionWithWait),
+		phases.WithResourceOptions(phases.ResourceOptionWithWait),
 	)
 
 	r.Phases.Register(
@@ -83,6 +83,12 @@ func (r *CertificatesCapabilityReconciler) InitializePhases() {
 	)
 
 	// Delete Phases
+	r.Phases.Register(
+		"Delete",
+		phases.DeletePhase,
+		phases.DeleteEvent,
+	)
+
 	r.Phases.Register(
 		"DeletionComplete",
 		phases.DeletionCompletePhase,

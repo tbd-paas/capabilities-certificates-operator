@@ -1,0 +1,195 @@
+commonOverlays:
+  - name: "add namespace markers"
+    query:
+      - metadata.namespace
+      - subjects[*].namespace
+      - "webhooks[*].clientConfig.service.namespace"
+    value: "{{ .defaultNamespace }}"  # +operator-builder:field:name=namespace,default="{{ .defaultNamespace }}",type=string
+
+  - name: "add labels"
+    query:
+      - metadata.labels
+    action: merge
+    value:
+      capabilities.tbd.io/capability: certificates
+      capabilities.tbd.io/version: "{{ .operatorVersion}}"
+      capabilities.tbd.io/platform-version: "{{ .platformVersion }}"
+      app.kubernetes.io/version: "{{ .projectVersion }}"
+      app.kubernetes.io/part-of: platform
+      app.kubernetes.io/managed-by: certificates-operator
+
+  - name: "add labels to pods"
+    query:
+      - spec.template.metadata.labels
+    action: merge
+    onMissing:
+      action: ignore
+    value:
+      capabilities.tbd.io/capability: certificates
+      capabilities.tbd.io/version: "{{ .operatorVersion}}"
+      capabilities.tbd.io/platform-version: "{{ .platformVersion }}"
+      app.kubernetes.io/version: "{{ .projectVersion }}"
+      app.kubernetes.io/part-of: platform
+      app.kubernetes.io/managed-by: certificates-operator
+
+  - name: "remove labels"
+    query:
+      - metadata.labels['platform.nukleros.io/category']
+      - metadata.labels['platform.nukleros.io/project']
+      - spec.template.metadata.labels['platform.nukleros.io/category']
+      - spec.template.metadata.labels['platform.nukleros.io/project']
+    action: delete 
+
+  - name: "add node selector"
+    documentQuery:
+      - conditions:
+        - query: $[?($.kind == "Deployment")]
+    query:
+      - spec.template.spec.nodeSelector
+    value:
+      tbd.io/node-type: platform
+      kubernetes.io/arch: arm64
+
+yamlFiles:
+  - name: "trust-manager crds"
+    path: "../vendor/crds.yaml"
+    outputPath: "manifests/crds.yaml"
+
+  - name: "trust-manager controller deployment"
+    path: "../vendor/deployment.yaml"
+    outputPath: "manifests/deployment.yaml"
+    overlays:
+      - name: "add controller replica count marker"
+        query: "$[?($.metadata.name == 'trust-manager')]"
+        value:
+          spec:
+            # +operator-builder:field:name=trustManager.controller.replicas,default="%v",type=int,description=`
+            # Number of replicas to use for the trust-manager controller deployment.`
+            replicas: !!int "%v"
+
+      - name: "add controller image name markers"
+        documentQuery:
+          - conditions:
+            - query: $[?($.metadata.name == "trust-manager")]
+        query: "spec.template.spec.containers[?(@.name == 'trust-manager-controller')]"
+        value:
+          # +operator-builder:field:name=trustManager.controller.image,default="%v",type=string,description=`
+          # Image to use for trust-manager controller deployment.`
+          image: "%v"
+          resources:
+            requests:
+              # +operator-builder:field:name=trustManager.controller.resources.requests.cpu,default="%v",type=string,description=`
+              # CPU requests to use for trust-manager controller deployment.`
+              cpu: "%v"
+              # +operator-builder:field:name=trustManager.controller.resources.requests.memory,default="%v",type=string,description=`
+              # Memory requests to use for trust-manager controller deployment.`
+              memory: "%v"
+            limits:
+              # +operator-builder:field:name=trustManager.controller.resources.limits.memory,default="%v",type=string,description=`
+              # Memory limits to use for trust-manager controller deployment.`
+              memory: "%v"
+
+  - name: "trust-manager webhook deployment"
+    path: "../vendor/deployment.yaml"
+    outputPath: "manifests/deployment.yaml"
+    overlays:
+      - name: "add webhook replica count marker"
+        query: "$[?($.metadata.name == 'trust-manager-webhook')]"
+        value:
+          spec:
+            # +operator-builder:field:name=trustManager.webhook.replicas,default="%v",type=int,description=`
+            # Number of replicas to use for the trust-manager webhook deployment.`
+            replicas: !!int "%v"
+
+      - name: "add webhook image name markers and adjust readiness probe"
+        documentQuery:
+          - conditions:
+            - query: $[?($.metadata.name == "trust-manager-webhook")]
+        query: "spec.template.spec.containers[?(@.name == 'trust-manager-webhook')]"
+        value:
+          # +operator-builder:field:name=trustManager.webhook.image,default="%v",type=string,description=`
+          # Image to use for trust-manager webhook deployment.`
+          image: "%v"
+          resources:
+            requests:
+              # +operator-builder:field:name=trustManager.webhook.resources.requests.cpu,default="%v",type=string,description=`
+              # CPU requests to use for trust-manager webhook deployment.`
+              cpu: "%v"
+              # +operator-builder:field:name=trustManager.webhook.resources.requests.memory,default="%v",type=string,description=`
+              # Memory requests to use for trust-manager webhook deployment.`
+              memory: "%v"
+            limits:
+              # +operator-builder:field:name=trustManager.webhook.resources.limits.memory,default="%v",type=string,description=`
+              # Memory limits to use for trust-manager webhook deployment.`
+              memory: "%v"
+
+  - name: "trust-manager rbac"
+    path: "../vendor/rbac.yaml"
+    outputPath: "manifests/rbac.yaml"
+
+  - name: "trust-manager service"
+    path: "../vendor/service.yaml"
+    outputPath: "manifests/service.yaml"
+
+  - name: "trust-manager certificates"
+    path: "../vendor/certificates.yaml"
+    outputPath: "manifests/certificates.yaml"
+    overlays:
+      - name: "ensure we only accept the certificates resource"
+        query: "$"
+        action: delete
+        documentQuery:
+          - conditions:
+              - query: $[?($.kind != "Certificate")]
+
+      - name: "ensure name is updated appropriately"
+        query: metadata.name
+        value: trust-manager
+
+      - name: "ensure issuer name is used correctly"
+        documentQuery:
+          - conditions:
+              - query: $[?($.kind == "Certificate")]
+        query: spec.issuerRef
+        action: replace
+        value: 
+          name: "internal"
+          kind: "ClusterIssuer"
+
+      - name: "ensure secret name is used correctly"
+        documentQuery:
+          - conditions:
+              - query: $[?($.kind == "Certificate")]
+        query: spec.secretName
+        action: replace
+        value: "trust-manager"
+
+      - name: "ensure certificate common name generated correctly"
+        documentQuery:
+          - conditions:
+              - query: $[?($.kind == "Certificate")]
+        query: spec.commonName
+        action: replace
+        value: "trust-manager.{{ .defaultNamespace }}.svc"
+
+      - name: "ensure certificate dns name generated correctly"
+        documentQuery:
+          - conditions:
+              - query: $[?($.kind == "Certificate")]
+        query: spec.dnsNames
+        action: replace
+        value:
+          - "trust-manager"
+          - "trust-manager.{{ .defaultNamespace }}"
+          - "trust-manager.{{ .defaultNamespace }}.svc"
+          - "trust-manager.{{ .defaultNamespace }}.svc.local"
+
+  - name: "trust-manager webhook"
+    path: "../vendor/webhook.yaml"
+    outputPath: "manifests/webhook.yaml"
+    overlays:
+      - name: "set namespace in CA reference annotation"
+        query: "metadata.annotations"
+        value:
+          # +operator-builder:field:name=namespace,type=string,replace="certs-namespace"
+          cert-manager.io/inject-ca-from: certs-namespace/trust-manager

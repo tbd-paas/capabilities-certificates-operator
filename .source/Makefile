@@ -59,13 +59,29 @@ operator-create:
 #
 # project management
 #
+
+# create scaffold
 PROJECT ?=
 project:
 	@mkdir -p $(PROJECT)/config $(PROJECT)/vendor $(PROJECT)/manifests
 	@touch $(PROJECT)/config/values.yaml $(PROJECT)/config/vendor.yaml $(PROJECT)/config/overlays.yaml
 
+# download from upstream
+download = (vendir sync --file $1/config/vendor.yaml --lock-file $1/config/vendor.yaml.lock)
 download:
-	vendir sync --file $(PROJECT)/config/vendor.yaml --lock-file $(PROJECT)/config/vendor.yaml.lock
+	$(call download, $(PROJECT))
 
+download-all:
+	@for project in $$(find . -maxdepth 1 -type d ! -name "assets" ! -name "." -exec basename {} \;); do \
+		$(call download, $$project); \
+	done
+
+# overlay changes
+overlay = (yot -I 2 -i $1/config/overlays.yaml -o $1 -f $1/config/values.yaml)
 overlay:
-	yot -I 2 -i $(PROJECT)/config/overlays.yaml -o $(PROJECT) -f $(PROJECT)/config/values.yaml
+	$(call overlay, $(PROJECT))
+
+overlay-all:
+	@for project in $$(find . -maxdepth 1 -type d ! -name "assets" ! -name "." -exec basename {} \;); do \
+		$(call overlay, $$project); \
+	done

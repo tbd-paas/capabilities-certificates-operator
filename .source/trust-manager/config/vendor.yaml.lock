@@ -7,5 +7,5 @@ directories:
       tags:
       - v0.2.0
     path: .
-  path: cert-manager/vendor
+  path: trust-manager/vendor
 kind: LockConfig

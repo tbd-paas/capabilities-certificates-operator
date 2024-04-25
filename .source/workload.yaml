@@ -12,9 +12,19 @@ spec:
     description: Manage the certificates capability
   resources:
     - namespace.yaml
+
+    # cert-manager
     - cert-manager/manifests/crds.yaml
     - cert-manager/manifests/rbac.yaml
     - cert-manager/manifests/deployment.yaml
     - cert-manager/manifests/service.yaml
     - cert-manager/manifests/issuer-internal.yaml
     - cert-manager/manifests/webhook.yaml
+
+    # trust-manager
+    - trust-manager/manifests/crds.yaml
+    - trust-manager/manifests/rbac.yaml
+    - trust-manager/manifests/certificates.yaml
+    - trust-manager/manifests/deployment.yaml
+    - trust-manager/manifests/service.yaml
+    - trust-manager/manifests/webhook.yaml

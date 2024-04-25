@@ -64,6 +64,9 @@ spec:
           memory: "32Mi"
         limits:
           memory: "64Mi"
+  trustManager:
+    controller:
+      replicas: 2
 `
 
 // sampleCertificatesCapabilityRequired is a sample containing only required fields
@@ -175,6 +178,19 @@ var CreateFuncs = []func(
 	CreateClusterIssuerInternal,
 	CreateMutatingWebhookCertManagerWebhook,
 	CreateValidatingWebhookCertManagerWebhook,
+	CreateCRDBundlesTrustCertManagerIo,
+	CreateServiceAccountNamespaceTrustManager,
+	CreateClusterRoleTrustManager,
+	CreateClusterRoleBindingTrustManager,
+	CreateRoleNamespaceTrustManager,
+	CreateRoleNamespaceTrustManagerLeaderelection,
+	CreateRoleBindingNamespaceTrustManager,
+	CreateRoleBindingNamespaceTrustManagerLeaderelection,
+	CreateCertNamespaceTrustManager,
+	CreateDeploymentNamespaceTrustManager,
+	CreateServiceNamespaceTrustManagerMetrics,
+	CreateServiceNamespaceTrustManager,
+	CreateValidatingWebhookTrustManager,
 }
 
 // InitFuncs is an array of functions that are called prior to starting the controller manager.  This is
@@ -196,6 +212,7 @@ var InitFuncs = []func(
 	CreateCRDClusterissuersCertManagerIo,
 	CreateCRDIssuersCertManagerIo,
 	CreateCRDOrdersAcmeCertManagerIo,
+	CreateCRDBundlesTrustCertManagerIo,
 }
 
 func ConvertWorkload(component workload.Workload) (*capabilitiesv1alpha1.CertificatesCapability, error) {

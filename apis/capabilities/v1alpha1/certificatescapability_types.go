@@ -45,6 +45,9 @@ type CertificatesCapabilitySpec struct {
 
 	// +kubebuilder:validation:Optional
 	CertManager CertificatesCapabilitySpecCertManager `json:"certManager,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	TrustManager CertificatesCapabilitySpecTrustManager `json:"trustManager,omitempty"`
 }
 
 type CertificatesCapabilitySpecAws struct {
@@ -221,6 +224,20 @@ type CertificatesCapabilitySpecCertManagerWebhookResourcesLimits struct {
 	//
 	//	Memory limits to use for cert-manager webhook deployment.
 	Memory string `json:"memory,omitempty"`
+}
+
+type CertificatesCapabilitySpecTrustManager struct {
+	// +kubebuilder:validation:Optional
+	Controller CertificatesCapabilitySpecTrustManagerController `json:"controller,omitempty"`
+}
+
+type CertificatesCapabilitySpecTrustManagerController struct {
+	// +kubebuilder:default=2
+	// +kubebuilder:validation:Optional
+	// (Default: 2)
+	//
+	//	Number of replicas to use for the trust-manager controller deployment.
+	Replicas int `json:"replicas,omitempty"`
 }
 
 // CertificatesCapabilityStatus defines the observed state of CertificatesCapability.

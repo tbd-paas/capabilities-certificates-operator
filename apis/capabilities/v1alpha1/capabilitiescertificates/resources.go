@@ -67,6 +67,13 @@ spec:
   trustManager:
     controller:
       replicas: 2
+      image: "quay.io/jetstack/trust-manager:v0.9.2"
+      resources:
+        requests:
+          cpu: "25m"
+          memory: "32Mi"
+        limits:
+          memory: "64Mi"
 `
 
 // sampleCertificatesCapabilityRequired is a sample containing only required fields

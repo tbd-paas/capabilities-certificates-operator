@@ -117,8 +117,10 @@ func CreateDeploymentNamespaceTrustManager(
 						},
 						"containers": []interface{}{
 							map[string]interface{}{
-								"name":            "trust-manager",
-								"image":           "quay.io/jetstack/trust-manager:v0.9.2",
+								"name": "trust-manager",
+								// controlled by field: trustManager.controller.image
+								//  Image to use for trust-manager controller deployment.
+								"image":           parent.Spec.TrustManager.Controller.Image,
 								"imagePullPolicy": "IfNotPresent",
 								"ports": []interface{}{
 									map[string]interface{}{
@@ -144,7 +146,7 @@ func CreateDeploymentNamespaceTrustManager(
 									"--metrics-port=9402",
 									"--readiness-probe-port=6060",
 									"--readiness-probe-path=/readyz",
-									"--trust-namespace=nukleros-certs-system",
+									"--trust-namespace=" + parent.Spec.Namespace + "", //  controlled by field: namespace
 									"--webhook-host=0.0.0.0",
 									"--webhook-port=6443",
 									"--webhook-certificate-dir=/tls",
@@ -164,11 +166,17 @@ func CreateDeploymentNamespaceTrustManager(
 								},
 								"resources": map[string]interface{}{
 									"requests": map[string]interface{}{
-										"cpu":    "25m",
-										"memory": "32Mi",
+										// controlled by field: trustManager.controller.resources.requests.cpu
+										//  CPU requests to use for trust-manager controller deployment.
+										"cpu": parent.Spec.TrustManager.Controller.Resources.Requests.Cpu,
+										// controlled by field: trustManager.controller.resources.requests.memory
+										//  Memory requests to use for trust-manager controller deployment.
+										"memory": parent.Spec.TrustManager.Controller.Resources.Requests.Memory,
 									},
 									"limits": map[string]interface{}{
-										"memory": "64Mi",
+										// controlled by field: trustManager.controller.resources.limits.memory
+										//  Memory limits to use for trust-manager controller deployment.
+										"memory": parent.Spec.TrustManager.Controller.Resources.Limits.Memory,
 									},
 								},
 								"securityContext": map[string]interface{}{
@@ -198,7 +206,7 @@ func CreateDeploymentNamespaceTrustManager(
 								"name": "tls",
 								"secret": map[string]interface{}{
 									"defaultMode": 420,
-									"secretName":  "trust-manager-tls",
+									"secretName":  "trust-manager",
 								},
 							},
 						},

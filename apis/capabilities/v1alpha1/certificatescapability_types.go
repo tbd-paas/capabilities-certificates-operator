@@ -238,6 +238,49 @@ type CertificatesCapabilitySpecTrustManagerController struct {
 	//
 	//	Number of replicas to use for the trust-manager controller deployment.
 	Replicas int `json:"replicas,omitempty"`
+
+	// +kubebuilder:default="quay.io/jetstack/trust-manager:v0.9.2"
+	// +kubebuilder:validation:Optional
+	// (Default: "quay.io/jetstack/trust-manager:v0.9.2")
+	//
+	//	Image to use for trust-manager controller deployment.
+	Image string `json:"image,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Resources CertificatesCapabilitySpecTrustManagerControllerResources `json:"resources,omitempty"`
+}
+
+type CertificatesCapabilitySpecTrustManagerControllerResources struct {
+	// +kubebuilder:validation:Optional
+	Requests CertificatesCapabilitySpecTrustManagerControllerResourcesRequests `json:"requests,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Limits CertificatesCapabilitySpecTrustManagerControllerResourcesLimits `json:"limits,omitempty"`
+}
+
+type CertificatesCapabilitySpecTrustManagerControllerResourcesRequests struct {
+	// +kubebuilder:default="25m"
+	// +kubebuilder:validation:Optional
+	// (Default: "25m")
+	//
+	//	CPU requests to use for trust-manager controller deployment.
+	Cpu string `json:"cpu,omitempty"`
+
+	// +kubebuilder:default="32Mi"
+	// +kubebuilder:validation:Optional
+	// (Default: "32Mi")
+	//
+	//	Memory requests to use for trust-manager controller deployment.
+	Memory string `json:"memory,omitempty"`
+}
+
+type CertificatesCapabilitySpecTrustManagerControllerResourcesLimits struct {
+	// +kubebuilder:default="64Mi"
+	// +kubebuilder:validation:Optional
+	// (Default: "64Mi")
+	//
+	//	Memory limits to use for trust-manager controller deployment.
+	Memory string `json:"memory,omitempty"`
 }
 
 // CertificatesCapabilityStatus defines the observed state of CertificatesCapability.

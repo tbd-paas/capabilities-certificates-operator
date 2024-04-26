@@ -60,18 +60,27 @@ yamlFiles:
     outputPath: "manifests/deployment.yaml"
     overlays:
       - name: "add controller replica count marker"
-        query: "$[?($.metadata.name == 'trust-manager')]"
+        documentQuery:
+          - conditions:
+            - query: $[?($.metadata.name == "trust-manager")]
+        query: spec
         value:
-          spec:
-            # +operator-builder:field:name=trustManager.controller.replicas,default="%v",type=int,description=`
-            # Number of replicas to use for the trust-manager controller deployment.`
-            replicas: !!int "%v"
+          # +operator-builder:field:name=trustManager.controller.replicas,default="%v",type=int,description=`
+          # Number of replicas to use for the trust-manager controller deployment.`
+          replicas: !!int "%v"
+
+      - name: "adjust secret name"
+        documentQuery:
+          - conditions:
+            - query: $[?($.metadata.name == "trust-manager")]
+        query: spec.template.spec.volumes[?(@.name == "tls")].secret.secretName
+        value: trust-manager
 
       - name: "add controller image name markers"
         documentQuery:
           - conditions:
             - query: $[?($.metadata.name == "trust-manager")]
-        query: "spec.template.spec.containers[?(@.name == 'trust-manager-controller')]"
+        query: "spec.template.spec.containers[?(@.name == 'trust-manager')]"
         value:
           # +operator-builder:field:name=trustManager.controller.image,default="%v",type=string,description=`
           # Image to use for trust-manager controller deployment.`
@@ -89,39 +98,9 @@ yamlFiles:
               # Memory limits to use for trust-manager controller deployment.`
               memory: "%v"
 
-  - name: "trust-manager webhook deployment"
-    path: "../vendor/deployment.yaml"
-    outputPath: "manifests/deployment.yaml"
-    overlays:
-      - name: "add webhook replica count marker"
-        query: "$[?($.metadata.name == 'trust-manager-webhook')]"
-        value:
-          spec:
-            # +operator-builder:field:name=trustManager.webhook.replicas,default="%v",type=int,description=`
-            # Number of replicas to use for the trust-manager webhook deployment.`
-            replicas: !!int "%v"
-
-      - name: "add webhook image name markers and adjust readiness probe"
-        documentQuery:
-          - conditions:
-            - query: $[?($.metadata.name == "trust-manager-webhook")]
-        query: "spec.template.spec.containers[?(@.name == 'trust-manager-webhook')]"
-        value:
-          # +operator-builder:field:name=trustManager.webhook.image,default="%v",type=string,description=`
-          # Image to use for trust-manager webhook deployment.`
-          image: "%v"
-          resources:
-            requests:
-              # +operator-builder:field:name=trustManager.webhook.resources.requests.cpu,default="%v",type=string,description=`
-              # CPU requests to use for trust-manager webhook deployment.`
-              cpu: "%v"
-              # +operator-builder:field:name=trustManager.webhook.resources.requests.memory,default="%v",type=string,description=`
-              # Memory requests to use for trust-manager webhook deployment.`
-              memory: "%v"
-            limits:
-              # +operator-builder:field:name=trustManager.webhook.resources.limits.memory,default="%v",type=string,description=`
-              # Memory limits to use for trust-manager webhook deployment.`
-              memory: "%v"
+      - name: "ensure trust namespace is updated"
+        query: spec.template.spec.containers[?(@.name == "trust-manager")].args[?(@ =~ /^--trust-namespace/)]
+        value: "--trust-namespace=tbd-certificates-system" # +operator-builder:field:name=namespace,replace=tbd-certificates-system,default="{{ .defaultNamespace }}",type=string
 
   - name: "trust-manager rbac"
     path: "../vendor/rbac.yaml"

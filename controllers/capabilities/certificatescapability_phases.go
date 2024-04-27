@@ -83,11 +83,11 @@ func (r *CertificatesCapabilityReconciler) InitializePhases() {
 	)
 
 	// Delete Phases
-	r.Phases.Register(
-		"Delete",
-		phases.DeletePhase,
-		phases.DeleteEvent,
-	)
+	// r.Phases.Register(
+	// 	"Delete",
+	// 	phases.DeletePhase,
+	// 	phases.DeleteEvent,
+	// )
 
 	r.Phases.Register(
 		"DeletionComplete",

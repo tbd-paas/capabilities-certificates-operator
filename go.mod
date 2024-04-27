@@ -4,11 +4,9 @@ go 1.22
 
 toolchain go1.22.1
 
-replace github.com/nukleros/operator-builder-tools => /Users/dscott/VSCode/github/scottd018/operator-builder-tools
-
 require (
 	github.com/go-logr/logr v1.4.1
-	github.com/nukleros/operator-builder-tools v0.4.0
+	github.com/nukleros/operator-builder-tools v0.5.0
 	github.com/onsi/ginkgo/v2 v2.17.1
 	github.com/onsi/gomega v1.32.0
 	github.com/spf13/cobra v1.8.0

@@ -1,16 +1,25 @@
 # Adds namespace to all resources.
-namespace: capabilities-certificates-operator-system
+namespace: tbd-operators-system
 
 # Value of this field is prepended to the
 # names of all resources, e.g. a deployment named
 # "wordpress" becomes "alices-wordpress".
 # Note that it should also match with the prefix (text before '-') of the namespace
 # field above.
-namePrefix: capabilities-certificates-operator-
+namePrefix: certificates-operator-
 
 # Labels to add to all resources and selectors.
-#commonLabels:
-#  someName: someValue
+commonLabels:
+  app: certificates-operator
+  app.kubernetes.io/name: certificates-operator
+  app.kubernetes.io/instance: manager
+  app.kubernetes.io/component: certificates-operator
+  app.kubernetes.io/version: v0.0.1
+  capabilities.tbd.io/capability: certificates
+  capabilities.tbd.io/version: v0.0.1
+  capabilities.tbd.io/platform-version: unstable
+  app.kubernetes.io/part-of: platform
+  app.kubernetes.io/managed-by: platform-config-operator
 
 bases:
 - ../crd

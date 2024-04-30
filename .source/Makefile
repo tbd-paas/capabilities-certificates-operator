@@ -85,3 +85,12 @@ overlay-all:
 	@for project in $$(find . -maxdepth 1 -type d ! -name "assets" ! -name "." -exec basename {} \;); do \
 		$(call overlay, $$project); \
 	done
+
+# controller manifests
+CONTROLLER_IMG ?= quay.io/tbd-paas/certificates-operator:latest
+controller-manifests:
+	cd .. && \
+	make kustomize && \
+	mkdir -p config/deploy && \
+	cd config/manager && ../../bin/kustomize edit set image controller=$(CONTROLLER_IMG) && \
+	cd ../../ && bin/kustomize build config/default > config/deploy/manifests.yaml

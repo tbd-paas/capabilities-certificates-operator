@@ -24,6 +24,8 @@ import (
 	capabilitiesv1alpha1 "github.com/tbd-paas/capabilities-certificates-operator/apis/capabilities/v1alpha1"
 )
 
+// +kubebuilder:rbac:groups=core,resources=endpoints,verbs=get;list;watch
+
 // MutateValidatingWebhookTrustManager mutates the ValidatingWebhookConfiguration resource with name trust-manager.
 func MutateValidatingWebhookTrustManager(
 	original client.Object,

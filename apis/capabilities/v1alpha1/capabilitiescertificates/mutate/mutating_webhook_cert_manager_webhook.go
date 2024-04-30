@@ -24,6 +24,8 @@ import (
 	capabilitiesv1alpha1 "github.com/tbd-paas/capabilities-certificates-operator/apis/capabilities/v1alpha1"
 )
 
+// +kubebuilder:rbac:groups=core,resources=endpoints,verbs=get;list;watch
+
 // MutateMutatingWebhookCertManagerWebhook mutates the MutatingWebhookConfiguration resource with name cert-manager-webhook.
 func MutateMutatingWebhookCertManagerWebhook(
 	original client.Object,

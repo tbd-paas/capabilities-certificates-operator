@@ -11,7 +11,7 @@ plugins:
     cliRootCommandName: certificatesctl
     controllerImg: ""
     enableOlm: false
-    workloadConfigPath: .source/workload.yaml
+    workloadConfigPath: .source/workload-cert-manager.yaml
 projectName: capabilities-certificates-operator
 repo: github.com/tbd-paas/capabilities-certificates-operator
 resources:
@@ -20,10 +20,19 @@ resources:
     namespaced: true
   controller: true
   domain: platform.tbd.io
-  group: capabilities
-  kind: CertificatesCapability
-  path: github.com/tbd-paas/capabilities-certificates-operator/apis/capabilities/v1alpha1
+  group: certificates
+  kind: TrustManager
+  path: github.com/tbd-paas/capabilities-certificates-operator/apis/certificates/v1alpha1
   version: v1alpha1
 - kind: ""
   version: ""
+- api:
+    crdVersion: v1
+    namespaced: true
+  controller: true
+  domain: platform.tbd.io
+  group: certificates
+  kind: CertManager
+  path: github.com/tbd-paas/capabilities-certificates-operator/apis/certificates/v1alpha1
+  version: v1alpha1
 version: "3"

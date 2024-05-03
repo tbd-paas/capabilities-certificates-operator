@@ -121,26 +121,6 @@ rules:
   verbs:
   - create
 - apiGroups:
-  - capabilities.platform.tbd.io
-  resources:
-  - certificatescapabilities
-  verbs:
-  - create
-  - delete
-  - get
-  - list
-  - patch
-  - update
-  - watch
-- apiGroups:
-  - capabilities.platform.tbd.io
-  resources:
-  - certificatescapabilities/status
-  verbs:
-  - get
-  - patch
-  - update
-- apiGroups:
   - cert-manager.io
   resources:
   - certificaterequests
@@ -260,6 +240,46 @@ rules:
   verbs:
   - sign
 - apiGroups:
+  - certificates.platform.tbd.io
+  resources:
+  - certmanagers
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - certificates.platform.tbd.io
+  resources:
+  - certmanagers/status
+  verbs:
+  - get
+  - patch
+  - update
+- apiGroups:
+  - certificates.platform.tbd.io
+  resources:
+  - trustmanagers
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - certificates.platform.tbd.io
+  resources:
+  - trustmanagers/status
+  verbs:
+  - get
+  - patch
+  - update
+- apiGroups:
   - coordination.k8s.io
   resources:
   - leases
@@ -285,14 +305,6 @@ rules:
 - apiGroups:
   - ""
   resources:
-  - endpoints
-  verbs:
-  - get
-  - list
-  - watch
-- apiGroups:
-  - ""
-  resources:
   - events
   verbs:
   - create
@@ -304,12 +316,8 @@ rules:
   resources:
   - namespaces
   verbs:
-  - create
-  - delete
   - get
   - list
-  - patch
-  - update
   - watch
 - apiGroups:
   - ""

@@ -32,20 +32,20 @@ metadata:
     capabilities.tbd.io/capability: certificates
     capabilities.tbd.io/platform-version: unstable
     capabilities.tbd.io/version: v0.0.1
-  name: certificatescapabilities.capabilities.platform.tbd.io
+  name: certmanagers.certificates.platform.tbd.io
 spec:
-  group: capabilities.platform.tbd.io
+  group: certificates.platform.tbd.io
   names:
-    kind: CertificatesCapability
-    listKind: CertificatesCapabilityList
-    plural: certificatescapabilities
-    singular: certificatescapability
+    kind: CertManager
+    listKind: CertManagerList
+    plural: certmanagers
+    singular: certmanager
   scope: Cluster
   versions:
   - name: v1alpha1
     schema:
       openAPIV3Schema:
-        description: CertificatesCapability is the Schema for the certificatescapabilities API.
+        description: CertManager is the Schema for the certmanagers API.
         properties:
           apiVersion:
             description: |-
@@ -65,7 +65,7 @@ spec:
           metadata:
             type: object
           spec:
-            description: CertificatesCapabilitySpec defines the desired state of CertificatesCapability.
+            description: CertManagerSpec defines the desired state of CertManager.
             properties:
               aws:
                 properties:
@@ -174,7 +174,150 @@ spec:
                     type: object
                 type: object
               namespace:
-                description: "\tNamespace to use where underlying certificates capability will be deployed."
+                default: tbd-certificates-system
+                description: '(Default: "tbd-certificates-system")'
+                type: string
+            type: object
+          status:
+            description: CertManagerStatus defines the observed state of CertManager.
+            properties:
+              conditions:
+                items:
+                  description: |-
+                    PhaseCondition describes an event that has occurred during a phase
+                    of the controller reconciliation loop.
+                  properties:
+                    lastModified:
+                      description: LastModified defines the time in which this component was updated.
+                      type: string
+                    message:
+                      description: Message defines a helpful message from the phase.
+                      type: string
+                    phase:
+                      description: Phase defines the phase in which the condition was set.
+                      type: string
+                    state:
+                      description: PhaseState defines the current state of the phase.
+                      enum:
+                      - Complete
+                      - Reconciling
+                      - Failed
+                      - Pending
+                      type: string
+                  required:
+                  - lastModified
+                  - message
+                  - phase
+                  - state
+                  type: object
+                type: array
+              created:
+                type: boolean
+              dependenciesSatisfied:
+                type: boolean
+              resources:
+                items:
+                  description: ChildResource is the resource and its condition as stored on the workload custom resource's status field.
+                  properties:
+                    condition:
+                      description: ResourceCondition defines the current condition of this resource.
+                      properties:
+                        created:
+                          description: Created defines whether this object has been successfully created or not.
+                          type: boolean
+                        lastModified:
+                          description: LastModified defines the time in which this resource was updated.
+                          type: string
+                        message:
+                          description: Message defines a helpful message from the resource phase.
+                          type: string
+                      required:
+                      - created
+                      type: object
+                    group:
+                      description: Group defines the API Group of the resource.
+                      type: string
+                    kind:
+                      description: Kind defines the kind of the resource.
+                      type: string
+                    name:
+                      description: Name defines the name of the resource from the metadata.name field.
+                      type: string
+                    namespace:
+                      description: Namespace defines the namespace in which this resource exists in.
+                      type: string
+                    version:
+                      description: Version defines the API Version of the resource.
+                      type: string
+                  required:
+                  - group
+                  - kind
+                  - name
+                  - namespace
+                  - version
+                  type: object
+                type: array
+            type: object
+        type: object
+    served: true
+    storage: true
+    subresources:
+      status: {}
+---
+apiVersion: apiextensions.k8s.io/v1
+kind: CustomResourceDefinition
+metadata:
+  annotations:
+    controller-gen.kubebuilder.io/version: v0.14.0
+  labels:
+    app: certificates-operator
+    app.kubernetes.io/component: certificates-operator
+    app.kubernetes.io/instance: manager
+    app.kubernetes.io/managed-by: platform-config-operator
+    app.kubernetes.io/name: certificates-operator
+    app.kubernetes.io/part-of: platform
+    app.kubernetes.io/version: v0.0.1
+    capabilities.tbd.io/capability: certificates
+    capabilities.tbd.io/platform-version: unstable
+    capabilities.tbd.io/version: v0.0.1
+  name: trustmanagers.certificates.platform.tbd.io
+spec:
+  group: certificates.platform.tbd.io
+  names:
+    kind: TrustManager
+    listKind: TrustManagerList
+    plural: trustmanagers
+    singular: trustmanager
+  scope: Cluster
+  versions:
+  - name: v1alpha1
+    schema:
+      openAPIV3Schema:
+        description: TrustManager is the Schema for the trustmanagers API.
+        properties:
+          apiVersion:
+            description: |-
+              APIVersion defines the versioned schema of this representation of an object.
+              Servers should convert recognized schemas to the latest internal value, and
+              may reject unrecognized values.
+              More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources
+            type: string
+          kind:
+            description: |-
+              Kind is a string value representing the REST resource this object represents.
+              Servers may infer this from the endpoint the client submits requests to.
+              Cannot be updated.
+              In CamelCase.
+              More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
+            type: string
+          metadata:
+            type: object
+          spec:
+            description: TrustManagerSpec defines the desired state of TrustManager.
+            properties:
+              namespace:
+                default: tbd-certificates-system
+                description: '(Default: "tbd-certificates-system")'
                 type: string
               trustManager:
                 properties:
@@ -213,7 +356,7 @@ spec:
                 type: object
             type: object
           status:
-            description: CertificatesCapabilityStatus defines the observed state of CertificatesCapability.
+            description: TrustManagerStatus defines the observed state of TrustManager.
             properties:
               conditions:
                 items:
@@ -499,26 +642,6 @@ rules:
   verbs:
   - create
 - apiGroups:
-  - capabilities.platform.tbd.io
-  resources:
-  - certificatescapabilities
-  verbs:
-  - create
-  - delete
-  - get
-  - list
-  - patch
-  - update
-  - watch
-- apiGroups:
-  - capabilities.platform.tbd.io
-  resources:
-  - certificatescapabilities/status
-  verbs:
-  - get
-  - patch
-  - update
-- apiGroups:
   - cert-manager.io
   resources:
   - certificaterequests
@@ -638,6 +761,46 @@ rules:
   verbs:
   - sign
 - apiGroups:
+  - certificates.platform.tbd.io
+  resources:
+  - certmanagers
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - certificates.platform.tbd.io
+  resources:
+  - certmanagers/status
+  verbs:
+  - get
+  - patch
+  - update
+- apiGroups:
+  - certificates.platform.tbd.io
+  resources:
+  - trustmanagers
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - certificates.platform.tbd.io
+  resources:
+  - trustmanagers/status
+  verbs:
+  - get
+  - patch
+  - update
+- apiGroups:
   - coordination.k8s.io
   resources:
   - leases
@@ -663,14 +826,6 @@ rules:
 - apiGroups:
   - ""
   resources:
-  - endpoints
-  verbs:
-  - get
-  - list
-  - watch
-- apiGroups:
-  - ""
-  resources:
   - events
   verbs:
   - create
@@ -682,12 +837,8 @@ rules:
   resources:
   - namespaces
   verbs:
-  - create
-  - delete
   - get
   - list
-  - patch
-  - update
   - watch
 - apiGroups:
   - ""

@@ -1,7 +1,0 @@
----
-apiVersion: v1
-kind: Namespace
-metadata:
-  # +operator-builder:field:name=namespace,type=string,description=`
-  # Namespace to use where underlying certificates capability will be deployed.`
-  name: tbd-certificates-system

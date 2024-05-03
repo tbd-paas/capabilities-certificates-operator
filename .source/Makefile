@@ -3,17 +3,22 @@ VERSION ?= latest
 #
 # code generation
 #
-INIT_OPTS=init \
-	--workload-config .source/workload.yaml \
-   	--repo github.com/tbd-paas/capabilities-certificates-operator \
-	--controller-image quay.io/tbd-paas/certificates-operator:$(VERSION) \
-    --skip-go-version-check
+WORKLOAD_CONFIG ?= .source/workload-cert-manager.yaml
+define operator_builder_init
+	operator-builder init \
+		--workload-config $(WORKLOAD_CONFIG) \
+		--repo github.com/tbd-paas/capabilities-certificates-operator \
+		--controller-image quay.io/tbd-paas/certificates-operator:$(VERSION) \
+		--skip-go-version-check
+endef
 
-CREATE_OPTS=create api \
-	--workload-config .source/workload.yaml \
-	--controller \
-	--resource \
-	--force
+define operator_builder_create
+	operator-builder create api \
+		--workload-config $1 \
+		--controller \
+		--resource \
+		--force
+endef
 
 MANAGED_ASSETS=../config/install \
 	../README.md \
@@ -51,10 +56,13 @@ operator-clean: preserve
 	rm -rf ../*
 
 operator-init:
-	cd .. && operator-builder $(INIT_OPTS)
+	cd .. && $(call operator_builder_init)
 
 operator-create:
-	cd .. && operator-builder $(CREATE_OPTS)
+	cd .. && \
+		for workload in $$(find .source -maxdepth 1 -type f -name "workload-*.yaml"); do \
+			$(call operator_builder_create, "$${workload}") ;\
+		done
 
 #
 # project management

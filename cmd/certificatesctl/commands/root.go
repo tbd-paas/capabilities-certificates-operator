@@ -25,9 +25,9 @@ import (
 	cmdversion "github.com/tbd-paas/capabilities-certificates-operator/cmd/certificatesctl/commands/version"
 
 	// specific imports for workloads
-	generatecapabilities "github.com/tbd-paas/capabilities-certificates-operator/cmd/certificatesctl/commands/generate/capabilities"
-	initcapabilities "github.com/tbd-paas/capabilities-certificates-operator/cmd/certificatesctl/commands/init/capabilities"
-	versioncapabilities "github.com/tbd-paas/capabilities-certificates-operator/cmd/certificatesctl/commands/version/capabilities"
+	generatecertificates "github.com/tbd-paas/capabilities-certificates-operator/cmd/certificatesctl/commands/generate/certificates"
+	initcertificates "github.com/tbd-paas/capabilities-certificates-operator/cmd/certificatesctl/commands/init/certificates"
+	versioncertificates "github.com/tbd-paas/capabilities-certificates-operator/cmd/certificatesctl/commands/version/certificates"
 	//+kubebuilder:scaffold:operator-builder:subcommands:imports
 )
 
@@ -62,7 +62,8 @@ func (c *CertificatesctlCommand) newInitSubCommand() {
 	_ = parentCommand
 
 	// add the init subcommands
-	initcapabilities.NewCertificatesCapabilitySubCommand(parentCommand)
+	initcertificates.NewTrustManagerSubCommand(parentCommand)
+	initcertificates.NewCertManagerSubCommand(parentCommand)
 	//+kubebuilder:scaffold:operator-builder:subcommands:init
 }
 
@@ -71,7 +72,8 @@ func (c *CertificatesctlCommand) newGenerateSubCommand() {
 	_ = parentCommand
 
 	// add the generate subcommands
-	generatecapabilities.NewCertificatesCapabilitySubCommand(parentCommand)
+	generatecertificates.NewTrustManagerSubCommand(parentCommand)
+	generatecertificates.NewCertManagerSubCommand(parentCommand)
 	//+kubebuilder:scaffold:operator-builder:subcommands:generate
 }
 
@@ -80,7 +82,8 @@ func (c *CertificatesctlCommand) newVersionSubCommand() {
 	_ = parentCommand
 
 	// add the version subcommands
-	versioncapabilities.NewCertificatesCapabilitySubCommand(parentCommand)
+	versioncertificates.NewTrustManagerSubCommand(parentCommand)
+	versioncertificates.NewCertManagerSubCommand(parentCommand)
 	//+kubebuilder:scaffold:operator-builder:subcommands:version
 }
 

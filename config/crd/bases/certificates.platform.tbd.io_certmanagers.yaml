@@ -47,117 +47,77 @@ spec:
                       for validating public DNS records for issuing public certificates."
                     type: string
                 type: object
-              certManager:
+              controller:
                 properties:
-                  controller:
+                  image:
+                    default: quay.io/jetstack/cert-manager-controller:v1.14.4
+                    description: "(Default: \"quay.io/jetstack/cert-manager-controller:v1.14.4\")\n\n\n\tImage
+                      to use for cert-manager controller deployment."
+                    type: string
+                  replicas:
+                    default: 2
+                    description: "(Default: 2)\n\n\n\tNumber of replicas to use for
+                      the cert-manager controller deployment."
+                    type: integer
+                  resources:
                     properties:
-                      image:
-                        default: quay.io/jetstack/cert-manager-controller:v1.14.4
-                        description: "(Default: \"quay.io/jetstack/cert-manager-controller:v1.14.4\")\n\n\n\tImage
-                          to use for cert-manager controller deployment."
-                        type: string
-                      replicas:
-                        default: 2
-                        description: "(Default: 2)\n\n\n\tNumber of replicas to use
-                          for the cert-manager controller deployment."
-                        type: integer
-                      resources:
+                      limits:
                         properties:
-                          limits:
-                            properties:
-                              memory:
-                                default: 64Mi
-                                description: "(Default: \"64Mi\")\n\n\n\tMemory limits
-                                  to use for cert-manager controller deployment."
-                                type: string
-                            type: object
-                          requests:
-                            properties:
-                              cpu:
-                                default: 25m
-                                description: "(Default: \"25m\")\n\n\n\tCPU requests
-                                  to use for cert-manager controller deployment."
-                                type: string
-                              memory:
-                                default: 32Mi
-                                description: "(Default: \"32Mi\")\n\n\n\tMemory requests
-                                  to use for cert-manager controller deployment."
-                                type: string
-                            type: object
+                          memory:
+                            default: 64Mi
+                            description: "(Default: \"64Mi\")\n\n\n\tMemory limits
+                              to use for cert-manager controller deployment."
+                            type: string
+                        type: object
+                      requests:
+                        properties:
+                          cpu:
+                            default: 25m
+                            description: "(Default: \"25m\")\n\n\n\tCPU requests to
+                              use for cert-manager controller deployment."
+                            type: string
+                          memory:
+                            default: 32Mi
+                            description: "(Default: \"32Mi\")\n\n\n\tMemory requests
+                              to use for cert-manager controller deployment."
+                            type: string
                         type: object
                     type: object
-                  injector:
+                type: object
+              injector:
+                properties:
+                  image:
+                    default: quay.io/jetstack/cert-manager-cainjector:v1.14.4
+                    description: "(Default: \"quay.io/jetstack/cert-manager-cainjector:v1.14.4\")\n\n\n\tImage
+                      to use for cert-manager CA injector deployment."
+                    type: string
+                  replicas:
+                    default: 2
+                    description: "(Default: 2)\n\n\n\tNumber of replicas to use for
+                      the cert-manager cainjector deployment."
+                    type: integer
+                  resources:
                     properties:
-                      image:
-                        default: quay.io/jetstack/cert-manager-cainjector:v1.14.4
-                        description: "(Default: \"quay.io/jetstack/cert-manager-cainjector:v1.14.4\")\n\n\n\tImage
-                          to use for cert-manager CA injector deployment."
-                        type: string
-                      replicas:
-                        default: 2
-                        description: "(Default: 2)\n\n\n\tNumber of replicas to use
-                          for the cert-manager cainjector deployment."
-                        type: integer
-                      resources:
+                      limits:
                         properties:
-                          limits:
-                            properties:
-                              memory:
-                                default: 128Mi
-                                description: "(Default: \"128Mi\")\n\n\n\tMemory limits
-                                  to use for cert-manager CA injector deployment."
-                                type: string
-                            type: object
-                          requests:
-                            properties:
-                              cpu:
-                                default: 50m
-                                description: "(Default: \"50m\")\n\n\n\tCPU requests
-                                  to use for cert-manager CA injector deployment."
-                                type: string
-                              memory:
-                                default: 64Mi
-                                description: "(Default: \"64Mi\")\n\n\n\tMemory requests
-                                  to use for cert-manager CA injector deployment."
-                                type: string
-                            type: object
+                          memory:
+                            default: 128Mi
+                            description: "(Default: \"128Mi\")\n\n\n\tMemory limits
+                              to use for cert-manager CA injector deployment."
+                            type: string
                         type: object
-                    type: object
-                  webhook:
-                    properties:
-                      image:
-                        default: quay.io/jetstack/cert-manager-webhook:v1.14.4
-                        description: "(Default: \"quay.io/jetstack/cert-manager-webhook:v1.14.4\")\n\n\n\tImage
-                          to use for cert-manager webhook deployment."
-                        type: string
-                      replicas:
-                        default: 2
-                        description: "(Default: 2)\n\n\n\tNumber of replicas to use
-                          for the cert-manager webhook deployment."
-                        type: integer
-                      resources:
+                      requests:
                         properties:
-                          limits:
-                            properties:
-                              memory:
-                                default: 64Mi
-                                description: "(Default: \"64Mi\")\n\n\n\tMemory limits
-                                  to use for cert-manager webhook deployment."
-                                type: string
-                            type: object
-                          requests:
-                            properties:
-                              cpu:
-                                default: 25m
-                                description: "(Default: \"25m\")\n\n\n\tCPU requests
-                                  to use for cert-manager webhook deployment."
-                                type: string
-                              memory:
-                                default: 32Mi
-                                description: "(Default: \"32Mi\")\n\n\n\tMemory requests
-                                  to use for cert-manager webhook deployment."
-                                type: string
-                            type: object
+                          cpu:
+                            default: 50m
+                            description: "(Default: \"50m\")\n\n\n\tCPU requests to
+                              use for cert-manager CA injector deployment."
+                            type: string
+                          memory:
+                            default: 64Mi
+                            description: "(Default: \"64Mi\")\n\n\n\tMemory requests
+                              to use for cert-manager CA injector deployment."
+                            type: string
                         type: object
                     type: object
                 type: object
@@ -165,6 +125,43 @@ spec:
                 default: tbd-certificates-system
                 description: '(Default: "tbd-certificates-system")'
                 type: string
+              webhook:
+                properties:
+                  image:
+                    default: quay.io/jetstack/cert-manager-webhook:v1.14.4
+                    description: "(Default: \"quay.io/jetstack/cert-manager-webhook:v1.14.4\")\n\n\n\tImage
+                      to use for cert-manager webhook deployment."
+                    type: string
+                  replicas:
+                    default: 2
+                    description: "(Default: 2)\n\n\n\tNumber of replicas to use for
+                      the cert-manager webhook deployment."
+                    type: integer
+                  resources:
+                    properties:
+                      limits:
+                        properties:
+                          memory:
+                            default: 64Mi
+                            description: "(Default: \"64Mi\")\n\n\n\tMemory limits
+                              to use for cert-manager webhook deployment."
+                            type: string
+                        type: object
+                      requests:
+                        properties:
+                          cpu:
+                            default: 25m
+                            description: "(Default: \"25m\")\n\n\n\tCPU requests to
+                              use for cert-manager webhook deployment."
+                            type: string
+                          memory:
+                            default: 32Mi
+                            description: "(Default: \"32Mi\")\n\n\n\tMemory requests
+                              to use for cert-manager webhook deployment."
+                            type: string
+                        type: object
+                    type: object
+                type: object
             type: object
           status:
             description: CertManagerStatus defines the observed state of CertManager.

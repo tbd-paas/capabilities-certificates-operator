@@ -21,13 +21,13 @@ import (
 
 	"github.com/nukleros/operator-builder-tools/pkg/controller/workload"
 
-	capabilitiesv1alpha1 "github.com/tbd-paas/capabilities-certificates-operator/apis/certificates/v1alpha1"
+	certificatesv1alpha1 "github.com/tbd-paas/capabilities-certificates-operator/apis/certificates/v1alpha1"
 )
 
 // MutateServiceAccountNamespaceCertManager mutates the ServiceAccount resource with name cert-manager.
 func MutateServiceAccountNamespaceCertManager(
 	original client.Object,
-	parent *capabilitiesv1alpha1.CertManager,
+	parent *certificatesv1alpha1.CertManager,
 	reconciler workload.Reconciler, req *workload.Request,
 ) ([]client.Object, error) {
 	// if either the reconciler or request are found to be nil, return the base object.
@@ -36,24 +36,6 @@ func MutateServiceAccountNamespaceCertManager(
 	}
 
 	// mutation logic goes here
-	if parent.Spec.Aws.RoleARN != "" {
-		current := original.GetAnnotations()
-
-		switch {
-		case current == nil:
-			original.SetAnnotations(
-				map[string]string{"eks.amazonaws.com/role-arn": parent.Spec.Aws.RoleARN},
-			)
-		case len(current) < 1:
-			original.SetAnnotations(
-				map[string]string{"eks.amazonaws.com/role-arn": parent.Spec.Aws.RoleARN},
-			)
-		default:
-			current["eks.amazonaws.com/role-arn"] = parent.Spec.Aws.RoleARN
-
-			original.SetAnnotations(current)
-		}
-	}
 
 	return []client.Object{original}, nil
 }

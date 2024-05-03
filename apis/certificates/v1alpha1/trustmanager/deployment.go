@@ -56,9 +56,9 @@ func CreateDeploymentNamespaceTrustManager(
 				},
 			},
 			"spec": map[string]interface{}{
-				// controlled by field: trustManager.controller.replicas
+				// controlled by field: controller.replicas
 				//  Number of replicas to use for the trust-manager controller deployment.
-				"replicas": parent.Spec.TrustManager.Controller.Replicas,
+				"replicas": parent.Spec.Controller.Replicas,
 				"selector": map[string]interface{}{
 					"matchLabels": map[string]interface{}{
 						"app.kubernetes.io/name":      "trust-manager",
@@ -118,9 +118,9 @@ func CreateDeploymentNamespaceTrustManager(
 						"containers": []interface{}{
 							map[string]interface{}{
 								"name": "trust-manager",
-								// controlled by field: trustManager.controller.image
+								// controlled by field: controller.image
 								//  Image to use for trust-manager controller deployment.
-								"image":           parent.Spec.TrustManager.Controller.Image,
+								"image":           parent.Spec.Controller.Image,
 								"imagePullPolicy": "IfNotPresent",
 								"ports": []interface{}{
 									map[string]interface{}{
@@ -166,17 +166,17 @@ func CreateDeploymentNamespaceTrustManager(
 								},
 								"resources": map[string]interface{}{
 									"requests": map[string]interface{}{
-										// controlled by field: trustManager.controller.resources.requests.cpu
+										// controlled by field: controller.resources.requests.cpu
 										//  CPU requests to use for trust-manager controller deployment.
-										"cpu": parent.Spec.TrustManager.Controller.Resources.Requests.Cpu,
-										// controlled by field: trustManager.controller.resources.requests.memory
+										"cpu": parent.Spec.Controller.Resources.Requests.Cpu,
+										// controlled by field: controller.resources.requests.memory
 										//  Memory requests to use for trust-manager controller deployment.
-										"memory": parent.Spec.TrustManager.Controller.Resources.Requests.Memory,
+										"memory": parent.Spec.Controller.Resources.Requests.Memory,
 									},
 									"limits": map[string]interface{}{
-										// controlled by field: trustManager.controller.resources.limits.memory
+										// controlled by field: controller.resources.limits.memory
 										//  Memory limits to use for trust-manager controller deployment.
-										"memory": parent.Spec.TrustManager.Controller.Resources.Limits.Memory,
+										"memory": parent.Spec.Controller.Resources.Limits.Memory,
 									},
 								},
 								"securityContext": map[string]interface{}{

@@ -41,15 +41,10 @@ type TrustManagerSpec struct {
 	Namespace string `json:"namespace,omitempty"`
 
 	// +kubebuilder:validation:Optional
-	TrustManager TrustManagerSpecTrustManager `json:"trustManager,omitempty"`
+	Controller TrustManagerSpecController `json:"controller,omitempty"`
 }
 
-type TrustManagerSpecTrustManager struct {
-	// +kubebuilder:validation:Optional
-	Controller TrustManagerSpecTrustManagerController `json:"controller,omitempty"`
-}
-
-type TrustManagerSpecTrustManagerController struct {
+type TrustManagerSpecController struct {
 	// +kubebuilder:default=2
 	// +kubebuilder:validation:Optional
 	// (Default: 2)
@@ -65,18 +60,18 @@ type TrustManagerSpecTrustManagerController struct {
 	Image string `json:"image,omitempty"`
 
 	// +kubebuilder:validation:Optional
-	Resources TrustManagerSpecTrustManagerControllerResources `json:"resources,omitempty"`
+	Resources TrustManagerSpecControllerResources `json:"resources,omitempty"`
 }
 
-type TrustManagerSpecTrustManagerControllerResources struct {
+type TrustManagerSpecControllerResources struct {
 	// +kubebuilder:validation:Optional
-	Requests TrustManagerSpecTrustManagerControllerResourcesRequests `json:"requests,omitempty"`
+	Requests TrustManagerSpecControllerResourcesRequests `json:"requests,omitempty"`
 
 	// +kubebuilder:validation:Optional
-	Limits TrustManagerSpecTrustManagerControllerResourcesLimits `json:"limits,omitempty"`
+	Limits TrustManagerSpecControllerResourcesLimits `json:"limits,omitempty"`
 }
 
-type TrustManagerSpecTrustManagerControllerResourcesRequests struct {
+type TrustManagerSpecControllerResourcesRequests struct {
 	// +kubebuilder:default="25m"
 	// +kubebuilder:validation:Optional
 	// (Default: "25m")
@@ -92,7 +87,7 @@ type TrustManagerSpecTrustManagerControllerResourcesRequests struct {
 	Memory string `json:"memory,omitempty"`
 }
 
-type TrustManagerSpecTrustManagerControllerResourcesLimits struct {
+type TrustManagerSpecControllerResourcesLimits struct {
 	// +kubebuilder:default="64Mi"
 	// +kubebuilder:validation:Optional
 	// (Default: "64Mi")

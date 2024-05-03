@@ -20,14 +20,14 @@ define operator_builder_create
 		--force
 endef
 
-MANAGED_ASSETS=../config/install \
+MANAGED_ASSETS=../go.mod \
 	../README.md \
-	../Makefile \
-	../Dockerfile \
-	../go.mod \
-	../controllers/capabilities/certificatescapability_phases.go \
-	../phases \
-	../.gitignore
+	../.gitignore \
+	../.dockerignore \
+	../config/default/kustomization.yaml \
+	../config/default/manager_auth_proxy_patch.yaml \
+	../controllers/certificates/certmanager_phases.go \
+	../controllers/certificates/trustmanager_phases.go
 
 # preserve manually mananged assets
 preserve:
@@ -62,7 +62,11 @@ operator-create:
 	cd .. && \
 		for workload in $$(find .source -maxdepth 1 -type f -name "workload-*.yaml"); do \
 			$(call operator_builder_create, "$${workload}") ;\
-		done
+		done && \
+	make manifests
+
+operator: download-all overlay-all operator-clean operator-init operator-create restore controller-manifests
+	cd ../ && go mod tidy
 
 #
 # project management

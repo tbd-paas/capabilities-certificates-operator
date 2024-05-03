@@ -56,9 +56,9 @@ func CreateDeploymentNamespaceCertManagerCainjector(
 				},
 			},
 			"spec": map[string]interface{}{
-				// controlled by field: certManager.injector.replicas
+				// controlled by field: injector.replicas
 				//  Number of replicas to use for the cert-manager cainjector deployment.
-				"replicas": parent.Spec.CertManager.Injector.Replicas,
+				"replicas": parent.Spec.Injector.Replicas,
 				"selector": map[string]interface{}{
 					"matchLabels": map[string]interface{}{
 						"app.kubernetes.io/name":      "cainjector",
@@ -93,9 +93,9 @@ func CreateDeploymentNamespaceCertManagerCainjector(
 						"containers": []interface{}{
 							map[string]interface{}{
 								"name": "cert-manager-cainjector",
-								// controlled by field: certManager.injector.image
+								// controlled by field: injector.image
 								//  Image to use for cert-manager CA injector deployment.
-								"image":           parent.Spec.CertManager.Injector.Image,
+								"image":           parent.Spec.Injector.Image,
 								"imagePullPolicy": "IfNotPresent",
 								"args": []interface{}{
 									"--v=2",
@@ -122,17 +122,17 @@ func CreateDeploymentNamespaceCertManagerCainjector(
 								},
 								"resources": map[string]interface{}{
 									"requests": map[string]interface{}{
-										// controlled by field: certManager.injector.resources.requests.cpu
+										// controlled by field: injector.resources.requests.cpu
 										//  CPU requests to use for cert-manager CA injector deployment.
-										"cpu": parent.Spec.CertManager.Injector.Resources.Requests.Cpu,
-										// controlled by field: certManager.injector.resources.requests.memory
+										"cpu": parent.Spec.Injector.Resources.Requests.Cpu,
+										// controlled by field: injector.resources.requests.memory
 										//  Memory requests to use for cert-manager CA injector deployment.
-										"memory": parent.Spec.CertManager.Injector.Resources.Requests.Memory,
+										"memory": parent.Spec.Injector.Resources.Requests.Memory,
 									},
 									"limits": map[string]interface{}{
-										// controlled by field: certManager.injector.resources.limits.memory
+										// controlled by field: injector.resources.limits.memory
 										//  Memory limits to use for cert-manager CA injector deployment.
-										"memory": parent.Spec.CertManager.Injector.Resources.Limits.Memory,
+										"memory": parent.Spec.Injector.Resources.Limits.Memory,
 									},
 								},
 							},
@@ -204,9 +204,9 @@ func CreateDeploymentNamespaceCertManager(
 				},
 			},
 			"spec": map[string]interface{}{
-				// controlled by field: certManager.controller.replicas
+				// controlled by field: controller.replicas
 				//  Number of replicas to use for the cert-manager controller deployment.
-				"replicas": parent.Spec.CertManager.Controller.Replicas,
+				"replicas": parent.Spec.Controller.Replicas,
 				"selector": map[string]interface{}{
 					"matchLabels": map[string]interface{}{
 						"app.kubernetes.io/name":      "cert-manager",
@@ -246,9 +246,9 @@ func CreateDeploymentNamespaceCertManager(
 						"containers": []interface{}{
 							map[string]interface{}{
 								"name": "cert-manager-controller",
-								// controlled by field: certManager.controller.image
+								// controlled by field: controller.image
 								//  Image to use for cert-manager controller deployment.
-								"image":           parent.Spec.CertManager.Controller.Image,
+								"image":           parent.Spec.Controller.Image,
 								"imagePullPolicy": "IfNotPresent",
 								"args": []interface{}{
 									"--v=2",
@@ -302,17 +302,17 @@ func CreateDeploymentNamespaceCertManager(
 								},
 								"resources": map[string]interface{}{
 									"requests": map[string]interface{}{
-										// controlled by field: certManager.controller.resources.requests.cpu
+										// controlled by field: controller.resources.requests.cpu
 										//  CPU requests to use for cert-manager controller deployment.
-										"cpu": parent.Spec.CertManager.Controller.Resources.Requests.Cpu,
-										// controlled by field: certManager.controller.resources.requests.memory
+										"cpu": parent.Spec.Controller.Resources.Requests.Cpu,
+										// controlled by field: controller.resources.requests.memory
 										//  Memory requests to use for cert-manager controller deployment.
-										"memory": parent.Spec.CertManager.Controller.Resources.Requests.Memory,
+										"memory": parent.Spec.Controller.Resources.Requests.Memory,
 									},
 									"limits": map[string]interface{}{
-										// controlled by field: certManager.controller.resources.limits.memory
+										// controlled by field: controller.resources.limits.memory
 										//  Memory limits to use for cert-manager controller deployment.
-										"memory": parent.Spec.CertManager.Controller.Resources.Limits.Memory,
+										"memory": parent.Spec.Controller.Resources.Limits.Memory,
 									},
 								},
 							},
@@ -384,9 +384,9 @@ func CreateDeploymentNamespaceCertManagerWebhook(
 				},
 			},
 			"spec": map[string]interface{}{
-				// controlled by field: certManager.webhook.replicas
+				// controlled by field: webhook.replicas
 				//  Number of replicas to use for the cert-manager webhook deployment.
-				"replicas": parent.Spec.CertManager.Webhook.Replicas,
+				"replicas": parent.Spec.Webhook.Replicas,
 				"selector": map[string]interface{}{
 					"matchLabels": map[string]interface{}{
 						"app.kubernetes.io/name":      "webhook",
@@ -421,9 +421,9 @@ func CreateDeploymentNamespaceCertManagerWebhook(
 						"containers": []interface{}{
 							map[string]interface{}{
 								"name": "cert-manager-webhook",
-								// controlled by field: certManager.webhook.image
+								// controlled by field: webhook.image
 								//  Image to use for cert-manager webhook deployment.
-								"image":           parent.Spec.CertManager.Webhook.Image,
+								"image":           parent.Spec.Webhook.Image,
 								"imagePullPolicy": "IfNotPresent",
 								"args": []interface{}{
 									"--v=2",
@@ -491,17 +491,17 @@ func CreateDeploymentNamespaceCertManagerWebhook(
 								},
 								"resources": map[string]interface{}{
 									"requests": map[string]interface{}{
-										// controlled by field: certManager.webhook.resources.requests.cpu
+										// controlled by field: webhook.resources.requests.cpu
 										//  CPU requests to use for cert-manager webhook deployment.
-										"cpu": parent.Spec.CertManager.Webhook.Resources.Requests.Cpu,
-										// controlled by field: certManager.webhook.resources.requests.memory
+										"cpu": parent.Spec.Webhook.Resources.Requests.Cpu,
+										// controlled by field: webhook.resources.requests.memory
 										//  Memory requests to use for cert-manager webhook deployment.
-										"memory": parent.Spec.CertManager.Webhook.Resources.Requests.Memory,
+										"memory": parent.Spec.Webhook.Resources.Requests.Memory,
 									},
 									"limits": map[string]interface{}{
-										// controlled by field: certManager.webhook.resources.limits.memory
+										// controlled by field: webhook.resources.limits.memory
 										//  Memory limits to use for cert-manager webhook deployment.
-										"memory": parent.Spec.CertManager.Webhook.Resources.Limits.Memory,
+										"memory": parent.Spec.Webhook.Resources.Limits.Memory,
 									},
 								},
 							},

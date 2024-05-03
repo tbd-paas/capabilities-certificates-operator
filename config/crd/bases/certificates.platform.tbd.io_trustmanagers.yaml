@@ -39,50 +39,47 @@ spec:
           spec:
             description: TrustManagerSpec defines the desired state of TrustManager.
             properties:
+              controller:
+                properties:
+                  image:
+                    default: quay.io/jetstack/trust-manager:v0.9.2
+                    description: "(Default: \"quay.io/jetstack/trust-manager:v0.9.2\")\n\n\n\tImage
+                      to use for trust-manager controller deployment."
+                    type: string
+                  replicas:
+                    default: 2
+                    description: "(Default: 2)\n\n\n\tNumber of replicas to use for
+                      the trust-manager controller deployment."
+                    type: integer
+                  resources:
+                    properties:
+                      limits:
+                        properties:
+                          memory:
+                            default: 64Mi
+                            description: "(Default: \"64Mi\")\n\n\n\tMemory limits
+                              to use for trust-manager controller deployment."
+                            type: string
+                        type: object
+                      requests:
+                        properties:
+                          cpu:
+                            default: 25m
+                            description: "(Default: \"25m\")\n\n\n\tCPU requests to
+                              use for trust-manager controller deployment."
+                            type: string
+                          memory:
+                            default: 32Mi
+                            description: "(Default: \"32Mi\")\n\n\n\tMemory requests
+                              to use for trust-manager controller deployment."
+                            type: string
+                        type: object
+                    type: object
+                type: object
               namespace:
                 default: tbd-certificates-system
                 description: '(Default: "tbd-certificates-system")'
                 type: string
-              trustManager:
-                properties:
-                  controller:
-                    properties:
-                      image:
-                        default: quay.io/jetstack/trust-manager:v0.9.2
-                        description: "(Default: \"quay.io/jetstack/trust-manager:v0.9.2\")\n\n\n\tImage
-                          to use for trust-manager controller deployment."
-                        type: string
-                      replicas:
-                        default: 2
-                        description: "(Default: 2)\n\n\n\tNumber of replicas to use
-                          for the trust-manager controller deployment."
-                        type: integer
-                      resources:
-                        properties:
-                          limits:
-                            properties:
-                              memory:
-                                default: 64Mi
-                                description: "(Default: \"64Mi\")\n\n\n\tMemory limits
-                                  to use for trust-manager controller deployment."
-                                type: string
-                            type: object
-                          requests:
-                            properties:
-                              cpu:
-                                default: 25m
-                                description: "(Default: \"25m\")\n\n\n\tCPU requests
-                                  to use for trust-manager controller deployment."
-                                type: string
-                              memory:
-                                default: 32Mi
-                                description: "(Default: \"32Mi\")\n\n\n\tMemory requests
-                                  to use for trust-manager controller deployment."
-                                type: string
-                            type: object
-                        type: object
-                    type: object
-                type: object
             type: object
           status:
             description: TrustManagerStatus defines the observed state of TrustManager.

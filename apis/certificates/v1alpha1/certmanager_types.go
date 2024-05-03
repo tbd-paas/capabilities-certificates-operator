@@ -44,7 +44,13 @@ type CertManagerSpec struct {
 	Aws CertManagerSpecAws `json:"aws,omitempty"`
 
 	// +kubebuilder:validation:Optional
-	CertManager CertManagerSpecCertManager `json:"certManager,omitempty"`
+	Injector CertManagerSpecInjector `json:"injector,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Controller CertManagerSpecController `json:"controller,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Webhook CertManagerSpecWebhook `json:"webhook,omitempty"`
 }
 
 type CertManagerSpecAws struct {
@@ -56,18 +62,7 @@ type CertManagerSpecAws struct {
 	RoleARN string `json:"roleARN,omitempty"`
 }
 
-type CertManagerSpecCertManager struct {
-	// +kubebuilder:validation:Optional
-	Injector CertManagerSpecCertManagerInjector `json:"injector,omitempty"`
-
-	// +kubebuilder:validation:Optional
-	Controller CertManagerSpecCertManagerController `json:"controller,omitempty"`
-
-	// +kubebuilder:validation:Optional
-	Webhook CertManagerSpecCertManagerWebhook `json:"webhook,omitempty"`
-}
-
-type CertManagerSpecCertManagerInjector struct {
+type CertManagerSpecInjector struct {
 	// +kubebuilder:default=2
 	// +kubebuilder:validation:Optional
 	// (Default: 2)
@@ -83,18 +78,18 @@ type CertManagerSpecCertManagerInjector struct {
 	Image string `json:"image,omitempty"`
 
 	// +kubebuilder:validation:Optional
-	Resources CertManagerSpecCertManagerInjectorResources `json:"resources,omitempty"`
+	Resources CertManagerSpecInjectorResources `json:"resources,omitempty"`
 }
 
-type CertManagerSpecCertManagerInjectorResources struct {
+type CertManagerSpecInjectorResources struct {
 	// +kubebuilder:validation:Optional
-	Requests CertManagerSpecCertManagerInjectorResourcesRequests `json:"requests,omitempty"`
+	Requests CertManagerSpecInjectorResourcesRequests `json:"requests,omitempty"`
 
 	// +kubebuilder:validation:Optional
-	Limits CertManagerSpecCertManagerInjectorResourcesLimits `json:"limits,omitempty"`
+	Limits CertManagerSpecInjectorResourcesLimits `json:"limits,omitempty"`
 }
 
-type CertManagerSpecCertManagerInjectorResourcesRequests struct {
+type CertManagerSpecInjectorResourcesRequests struct {
 	// +kubebuilder:default="50m"
 	// +kubebuilder:validation:Optional
 	// (Default: "50m")
@@ -110,7 +105,7 @@ type CertManagerSpecCertManagerInjectorResourcesRequests struct {
 	Memory string `json:"memory,omitempty"`
 }
 
-type CertManagerSpecCertManagerInjectorResourcesLimits struct {
+type CertManagerSpecInjectorResourcesLimits struct {
 	// +kubebuilder:default="128Mi"
 	// +kubebuilder:validation:Optional
 	// (Default: "128Mi")
@@ -119,7 +114,7 @@ type CertManagerSpecCertManagerInjectorResourcesLimits struct {
 	Memory string `json:"memory,omitempty"`
 }
 
-type CertManagerSpecCertManagerController struct {
+type CertManagerSpecController struct {
 	// +kubebuilder:default=2
 	// +kubebuilder:validation:Optional
 	// (Default: 2)
@@ -135,18 +130,18 @@ type CertManagerSpecCertManagerController struct {
 	Image string `json:"image,omitempty"`
 
 	// +kubebuilder:validation:Optional
-	Resources CertManagerSpecCertManagerControllerResources `json:"resources,omitempty"`
+	Resources CertManagerSpecControllerResources `json:"resources,omitempty"`
 }
 
-type CertManagerSpecCertManagerControllerResources struct {
+type CertManagerSpecControllerResources struct {
 	// +kubebuilder:validation:Optional
-	Requests CertManagerSpecCertManagerControllerResourcesRequests `json:"requests,omitempty"`
+	Requests CertManagerSpecControllerResourcesRequests `json:"requests,omitempty"`
 
 	// +kubebuilder:validation:Optional
-	Limits CertManagerSpecCertManagerControllerResourcesLimits `json:"limits,omitempty"`
+	Limits CertManagerSpecControllerResourcesLimits `json:"limits,omitempty"`
 }
 
-type CertManagerSpecCertManagerControllerResourcesRequests struct {
+type CertManagerSpecControllerResourcesRequests struct {
 	// +kubebuilder:default="25m"
 	// +kubebuilder:validation:Optional
 	// (Default: "25m")
@@ -162,7 +157,7 @@ type CertManagerSpecCertManagerControllerResourcesRequests struct {
 	Memory string `json:"memory,omitempty"`
 }
 
-type CertManagerSpecCertManagerControllerResourcesLimits struct {
+type CertManagerSpecControllerResourcesLimits struct {
 	// +kubebuilder:default="64Mi"
 	// +kubebuilder:validation:Optional
 	// (Default: "64Mi")
@@ -171,7 +166,7 @@ type CertManagerSpecCertManagerControllerResourcesLimits struct {
 	Memory string `json:"memory,omitempty"`
 }
 
-type CertManagerSpecCertManagerWebhook struct {
+type CertManagerSpecWebhook struct {
 	// +kubebuilder:default=2
 	// +kubebuilder:validation:Optional
 	// (Default: 2)
@@ -187,18 +182,18 @@ type CertManagerSpecCertManagerWebhook struct {
 	Image string `json:"image,omitempty"`
 
 	// +kubebuilder:validation:Optional
-	Resources CertManagerSpecCertManagerWebhookResources `json:"resources,omitempty"`
+	Resources CertManagerSpecWebhookResources `json:"resources,omitempty"`
 }
 
-type CertManagerSpecCertManagerWebhookResources struct {
+type CertManagerSpecWebhookResources struct {
 	// +kubebuilder:validation:Optional
-	Requests CertManagerSpecCertManagerWebhookResourcesRequests `json:"requests,omitempty"`
+	Requests CertManagerSpecWebhookResourcesRequests `json:"requests,omitempty"`
 
 	// +kubebuilder:validation:Optional
-	Limits CertManagerSpecCertManagerWebhookResourcesLimits `json:"limits,omitempty"`
+	Limits CertManagerSpecWebhookResourcesLimits `json:"limits,omitempty"`
 }
 
-type CertManagerSpecCertManagerWebhookResourcesRequests struct {
+type CertManagerSpecWebhookResourcesRequests struct {
 	// +kubebuilder:default="25m"
 	// +kubebuilder:validation:Optional
 	// (Default: "25m")
@@ -214,7 +209,7 @@ type CertManagerSpecCertManagerWebhookResourcesRequests struct {
 	Memory string `json:"memory,omitempty"`
 }
 
-type CertManagerSpecCertManagerWebhookResourcesLimits struct {
+type CertManagerSpecWebhookResourcesLimits struct {
 	// +kubebuilder:default="64Mi"
 	// +kubebuilder:validation:Optional
 	// (Default: "64Mi")

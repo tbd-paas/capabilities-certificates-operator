@@ -16,7 +16,7 @@ metadata:
     app.kubernetes.io/part-of: platform
     app.kubernetes.io/managed-by: certificates-operator
 spec:
-  # +operator-builder:field:name=certManager.injector.replicas,default="2",type=int,description=`
+  # +operator-builder:field:name=injector.replicas,default="2",type=int,description=`
   # Number of replicas to use for the cert-manager cainjector deployment.`
   replicas: 2
   selector:
@@ -47,7 +47,7 @@ spec:
         runAsNonRoot: true
       containers:
         - name: cert-manager-cainjector
-          # +operator-builder:field:name=certManager.injector.image,default="quay.io/jetstack/cert-manager-cainjector:v1.14.4",type=string,description=`
+          # +operator-builder:field:name=injector.image,default="quay.io/jetstack/cert-manager-cainjector:v1.14.4",type=string,description=`
           # Image to use for cert-manager CA injector deployment.`
           image: quay.io/jetstack/cert-manager-cainjector:v1.14.4
           imagePullPolicy: IfNotPresent
@@ -67,14 +67,14 @@ spec:
                 - ALL
           resources:
             requests:
-              # +operator-builder:field:name=certManager.injector.resources.requests.cpu,default="50m",type=string,description=`
+              # +operator-builder:field:name=injector.resources.requests.cpu,default="50m",type=string,description=`
               # CPU requests to use for cert-manager CA injector deployment.`
               cpu: 50m
-              # +operator-builder:field:name=certManager.injector.resources.requests.memory,default="64Mi",type=string,description=`
+              # +operator-builder:field:name=injector.resources.requests.memory,default="64Mi",type=string,description=`
               # Memory requests to use for cert-manager CA injector deployment.`
               memory: 64Mi
             limits:
-              # +operator-builder:field:name=certManager.injector.resources.limits.memory,default="128Mi",type=string,description=`
+              # +operator-builder:field:name=injector.resources.limits.memory,default="128Mi",type=string,description=`
               # Memory limits to use for cert-manager CA injector deployment.`
               memory: 128Mi
       nodeSelector:
@@ -111,7 +111,7 @@ metadata:
     app.kubernetes.io/part-of: platform
     app.kubernetes.io/managed-by: certificates-operator
 spec:
-  # +operator-builder:field:name=certManager.controller.replicas,default="2",type=int,description=`
+  # +operator-builder:field:name=controller.replicas,default="2",type=int,description=`
   # Number of replicas to use for the cert-manager controller deployment.`
   replicas: 2
   selector:
@@ -146,7 +146,7 @@ spec:
         runAsNonRoot: true
       containers:
         - name: cert-manager-controller
-          # +operator-builder:field:name=certManager.controller.image,default="quay.io/jetstack/cert-manager-controller:v1.14.4",type=string,description=`
+          # +operator-builder:field:name=controller.image,default="quay.io/jetstack/cert-manager-controller:v1.14.4",type=string,description=`
           # Image to use for cert-manager controller deployment.`
           image: quay.io/jetstack/cert-manager-controller:v1.14.4
           imagePullPolicy: IfNotPresent
@@ -186,14 +186,14 @@ spec:
             failureThreshold: 8
           resources:
             requests:
-              # +operator-builder:field:name=certManager.controller.resources.requests.cpu,default="25m",type=string,description=`
+              # +operator-builder:field:name=controller.resources.requests.cpu,default="25m",type=string,description=`
               # CPU requests to use for cert-manager controller deployment.`
               cpu: 25m
-              # +operator-builder:field:name=certManager.controller.resources.requests.memory,default="32Mi",type=string,description=`
+              # +operator-builder:field:name=controller.resources.requests.memory,default="32Mi",type=string,description=`
               # Memory requests to use for cert-manager controller deployment.`
               memory: 32Mi
             limits:
-              # +operator-builder:field:name=certManager.controller.resources.limits.memory,default="64Mi",type=string,description=`
+              # +operator-builder:field:name=controller.resources.limits.memory,default="64Mi",type=string,description=`
               # Memory limits to use for cert-manager controller deployment.`
               memory: 64Mi
       nodeSelector:
@@ -230,7 +230,7 @@ metadata:
     app.kubernetes.io/part-of: platform
     app.kubernetes.io/managed-by: certificates-operator
 spec:
-  # +operator-builder:field:name=certManager.webhook.replicas,default="2",type=int,description=`
+  # +operator-builder:field:name=webhook.replicas,default="2",type=int,description=`
   # Number of replicas to use for the cert-manager webhook deployment.`
   replicas: 2
   selector:
@@ -261,7 +261,7 @@ spec:
         runAsNonRoot: true
       containers:
         - name: cert-manager-webhook
-          # +operator-builder:field:name=certManager.webhook.image,default="quay.io/jetstack/cert-manager-webhook:v1.14.4",type=string,description=`
+          # +operator-builder:field:name=webhook.image,default="quay.io/jetstack/cert-manager-webhook:v1.14.4",type=string,description=`
           # Image to use for cert-manager webhook deployment.`
           image: quay.io/jetstack/cert-manager-webhook:v1.14.4
           imagePullPolicy: IfNotPresent
@@ -313,14 +313,14 @@ spec:
                   fieldPath: metadata.namespace
           resources:
             requests:
-              # +operator-builder:field:name=certManager.webhook.resources.requests.cpu,default="25m",type=string,description=`
+              # +operator-builder:field:name=webhook.resources.requests.cpu,default="25m",type=string,description=`
               # CPU requests to use for cert-manager webhook deployment.`
               cpu: 25m
-              # +operator-builder:field:name=certManager.webhook.resources.requests.memory,default="32Mi",type=string,description=`
+              # +operator-builder:field:name=webhook.resources.requests.memory,default="32Mi",type=string,description=`
               # Memory requests to use for cert-manager webhook deployment.`
               memory: 32Mi
             limits:
-              # +operator-builder:field:name=certManager.webhook.resources.limits.memory,default="64Mi",type=string,description=`
+              # +operator-builder:field:name=webhook.resources.limits.memory,default="64Mi",type=string,description=`
               # Memory limits to use for cert-manager webhook deployment.`
               memory: 64Mi
       nodeSelector:

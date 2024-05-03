@@ -65,7 +65,7 @@ yamlFiles:
             - query: $[?($.metadata.name == "trust-manager")]
         query: spec
         value:
-          # +operator-builder:field:name=trustManager.controller.replicas,default="%v",type=int,description=`
+          # +operator-builder:field:name=controller.replicas,default="%v",type=int,description=`
           # Number of replicas to use for the trust-manager controller deployment.`
           replicas: !!int "%v"
 
@@ -82,19 +82,19 @@ yamlFiles:
             - query: $[?($.metadata.name == "trust-manager")]
         query: "spec.template.spec.containers[?(@.name == 'trust-manager')]"
         value:
-          # +operator-builder:field:name=trustManager.controller.image,default="%v",type=string,description=`
+          # +operator-builder:field:name=controller.image,default="%v",type=string,description=`
           # Image to use for trust-manager controller deployment.`
           image: "%v"
           resources:
             requests:
-              # +operator-builder:field:name=trustManager.controller.resources.requests.cpu,default="%v",type=string,description=`
+              # +operator-builder:field:name=controller.resources.requests.cpu,default="%v",type=string,description=`
               # CPU requests to use for trust-manager controller deployment.`
               cpu: "%v"
-              # +operator-builder:field:name=trustManager.controller.resources.requests.memory,default="%v",type=string,description=`
+              # +operator-builder:field:name=controller.resources.requests.memory,default="%v",type=string,description=`
               # Memory requests to use for trust-manager controller deployment.`
               memory: "%v"
             limits:
-              # +operator-builder:field:name=trustManager.controller.resources.limits.memory,default="%v",type=string,description=`
+              # +operator-builder:field:name=controller.resources.limits.memory,default="%v",type=string,description=`
               # Memory limits to use for trust-manager controller deployment.`
               memory: "%v"
 

@@ -24,6 +24,9 @@ MANAGED_ASSETS=../go.mod \
 	../README.md \
 	../.gitignore \
 	../.dockerignore \
+	../.github/workflows/release.yml \
+	../.goreleaser.yml \
+	../Dockerfile \
 	../config/default/kustomization.yaml \
 	../config/default/manager_auth_proxy_patch.yaml \
 	../controllers/certificates/certmanager_phases.go \

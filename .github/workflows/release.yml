@@ -63,13 +63,3 @@ jobs:
 
           # TODO: add homebrew tap
           # HOMEBREW_TAP_GITHUB_TOKEN: "${{ secrets.HOMEBREW_TAP_GITHUB_TOKEN }}"
-
-      # - name: "Upload Controller Manifests to Release"
-      #   uses: "xresloader/upload-to-github-release@v1"
-      #   env:
-      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      #   with:
-      #     file: "/tmp/manifests.yaml"
-      #     tags: true
-      #     verbose: true
-      #     update_latest_release: true

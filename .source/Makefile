@@ -106,6 +106,8 @@ overlay-all:
 	done
 
 # controller manifests
+# NOTE: we need to preserve the original kustomization file as we always want our generated manifest to 
+#       be set to the latest release except when we tag a new version.
 CONTROLLER_IMG ?= quay.io/tbd-paas/certificates-operator:latest
 MANIFESTS_FILE ?= ../../config/deploy/manifests.yaml
 controller-manifests:
@@ -113,6 +115,8 @@ controller-manifests:
 	make kustomize && \
 	mkdir -p config/deploy && \
 	cd config/manager && \
+	cp -f kustomization.yaml kustomization.yaml.bak && \
 	export KUSTOMIZE_CMD=$$(ls ../../bin/kustomize*) && \
 	$$KUSTOMIZE_CMD edit set image controller=$(CONTROLLER_IMG) && \
-	$$KUSTOMIZE_CMD build ../../config/default > $(MANIFESTS_FILE)
+	$$KUSTOMIZE_CMD build ../../config/default > $(MANIFESTS_FILE) && \
+	mv kustomization.yaml.bak kustomization.yaml

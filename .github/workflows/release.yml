@@ -60,6 +60,7 @@ jobs:
         env:
           GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
           MANIFESTS_FILE: "config/deploy/manifests.yaml.generated"
+          MANIFESTS_ARTIFACT_NAME: "manifests.yaml"
 
           # TODO: add homebrew tap
           # HOMEBREW_TAP_GITHUB_TOKEN: "${{ secrets.HOMEBREW_TAP_GITHUB_TOKEN }}"

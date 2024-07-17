@@ -48,7 +48,7 @@ jobs:
       - name: "Generate Controller Manifests"
         run: |
           export CONTROLLER_IMG="${{ env.IMAGE }}:${{ github.ref_name }}"
-          export MANIFESTS_FILE="/tmp/manifests.yaml"
+          export MANIFESTS_FILE="../../config/deploy/manifests.yaml.generated"
           cd .source
           make controller-manifests
 
@@ -59,7 +59,7 @@ jobs:
           args: "release --clean -f ./.goreleaser.yml"
         env:
           GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
-          MANIFESTS_FILE: "/tmp/manifests.yaml"
+          MANIFESTS_FILE: "config/deploy/manifests.yaml.generated"
 
           # TODO: add homebrew tap
           # HOMEBREW_TAP_GITHUB_TOKEN: "${{ secrets.HOMEBREW_TAP_GITHUB_TOKEN }}"

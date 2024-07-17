@@ -45,17 +45,6 @@ jobs:
           push: true
           tags: "${{ env.IMAGE }}:${{ github.ref_name }},${{ env.IMAGE }}:latest"
 
-      - name: "Run Go Releaser"
-        uses: "goreleaser/goreleaser-action@v3"
-        with:
-          version: "latest"
-          args: "release --clean -f ./.goreleaser.yml"
-        env:
-          GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
-
-          # TODO: add homebrew tap
-          # HOMEBREW_TAP_GITHUB_TOKEN: "${{ secrets.HOMEBREW_TAP_GITHUB_TOKEN }}"
-
       - name: "Generate Controller Manifests"
         run: |
           export CONTROLLER_IMG="${{ env.IMAGE }}:${{ github.ref_name }}"
@@ -63,12 +52,24 @@ jobs:
           cd .source
           make controller-manifests
 
-      - name: "Upload Controller Manifests to Release"
-        uses: "xresloader/upload-to-github-release@v1"
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: "Run Go Releaser"
+        uses: "goreleaser/goreleaser-action@v3"
         with:
-          file: "/tmp/manifests.yaml"
-          tags: true
-          verbose: true
-          update_latest_release: true
+          version: "latest"
+          args: "release --clean -f ./.goreleaser.yml"
+        env:
+          GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+          MANIFESTS_FILE: "/tmp/manifests.yaml"
+
+          # TODO: add homebrew tap
+          # HOMEBREW_TAP_GITHUB_TOKEN: "${{ secrets.HOMEBREW_TAP_GITHUB_TOKEN }}"
+
+      # - name: "Upload Controller Manifests to Release"
+      #   uses: "xresloader/upload-to-github-release@v1"
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      #   with:
+      #     file: "/tmp/manifests.yaml"
+      #     tags: true
+      #     verbose: true
+      #     update_latest_release: true

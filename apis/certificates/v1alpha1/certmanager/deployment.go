@@ -138,9 +138,8 @@ func CreateDeploymentNamespaceCertManagerCainjector(
 							},
 						},
 						"nodeSelector": map[string]interface{}{
-							"kubernetes.io/os":   "linux",
-							"tbd.io/node-type":   "platform",
-							"kubernetes.io/arch": "arm64",
+							"kubernetes.io/os": "linux",
+							"tbd.io/node-type": "platform",
 						},
 						"affinity": map[string]interface{}{
 							"podAntiAffinity": map[string]interface{}{
@@ -318,9 +317,8 @@ func CreateDeploymentNamespaceCertManager(
 							},
 						},
 						"nodeSelector": map[string]interface{}{
-							"kubernetes.io/os":   "linux",
-							"tbd.io/node-type":   "platform",
-							"kubernetes.io/arch": "arm64",
+							"kubernetes.io/os": "linux",
+							"tbd.io/node-type": "platform",
 						},
 						"affinity": map[string]interface{}{
 							"podAntiAffinity": map[string]interface{}{
@@ -507,9 +505,8 @@ func CreateDeploymentNamespaceCertManagerWebhook(
 							},
 						},
 						"nodeSelector": map[string]interface{}{
-							"kubernetes.io/os":   "linux",
-							"tbd.io/node-type":   "platform",
-							"kubernetes.io/arch": "arm64",
+							"kubernetes.io/os": "linux",
+							"tbd.io/node-type": "platform",
 						},
 						"affinity": map[string]interface{}{
 							"podAntiAffinity": map[string]interface{}{

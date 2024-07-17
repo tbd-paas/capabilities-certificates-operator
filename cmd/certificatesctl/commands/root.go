@@ -28,7 +28,7 @@ import (
 	generatecertificates "github.com/tbd-paas/capabilities-certificates-operator/cmd/certificatesctl/commands/generate/certificates"
 	initcertificates "github.com/tbd-paas/capabilities-certificates-operator/cmd/certificatesctl/commands/init/certificates"
 	versioncertificates "github.com/tbd-paas/capabilities-certificates-operator/cmd/certificatesctl/commands/version/certificates"
-	//+kubebuilder:scaffold:operator-builder:subcommands:imports
+	// +kubebuilder:scaffold:operator-builder:subcommands:imports
 )
 
 // CertificatesctlCommand represents the base command when called without any subcommands.
@@ -64,7 +64,7 @@ func (c *CertificatesctlCommand) newInitSubCommand() {
 	// add the init subcommands
 	initcertificates.NewTrustManagerSubCommand(parentCommand)
 	initcertificates.NewCertManagerSubCommand(parentCommand)
-	//+kubebuilder:scaffold:operator-builder:subcommands:init
+	// +kubebuilder:scaffold:operator-builder:subcommands:init
 }
 
 func (c *CertificatesctlCommand) newGenerateSubCommand() {
@@ -74,7 +74,7 @@ func (c *CertificatesctlCommand) newGenerateSubCommand() {
 	// add the generate subcommands
 	generatecertificates.NewTrustManagerSubCommand(parentCommand)
 	generatecertificates.NewCertManagerSubCommand(parentCommand)
-	//+kubebuilder:scaffold:operator-builder:subcommands:generate
+	// +kubebuilder:scaffold:operator-builder:subcommands:generate
 }
 
 func (c *CertificatesctlCommand) newVersionSubCommand() {
@@ -84,7 +84,7 @@ func (c *CertificatesctlCommand) newVersionSubCommand() {
 	// add the version subcommands
 	versioncertificates.NewTrustManagerSubCommand(parentCommand)
 	versioncertificates.NewCertManagerSubCommand(parentCommand)
-	//+kubebuilder:scaffold:operator-builder:subcommands:version
+	// +kubebuilder:scaffold:operator-builder:subcommands:version
 }
 
 // addSubCommands adds any additional subCommands to the root command.

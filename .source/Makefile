@@ -31,7 +31,10 @@ MANAGED_ASSETS=../go.mod \
 	../config/default/kustomization.yaml \
 	../config/default/manager_auth_proxy_patch.yaml \
 	../controllers/certificates/certmanager_phases.go \
-	../controllers/certificates/trustmanager_phases.go
+	../controllers/certificates/trustmanager_phases.go \
+	../apis/certificates/v1alpha1/certmanager/mutate/mutating_webhook_cert_manager_webhook.go \
+	../apis/certificates/v1alpha1/certmanager/mutate/validating_webhook_cert_manager_webhook.go \
+	../apis/certificates/v1alpha1/trustmanager/mutate/validating_webhook_trust_manager.go
 
 # preserve manually mananged assets
 preserve:
@@ -108,5 +111,7 @@ controller-manifests:
 	cd .. && \
 	make kustomize && \
 	mkdir -p config/deploy && \
-	cd config/manager && ../../bin/kustomize edit set image controller=$(CONTROLLER_IMG) && \
-	cd ../../ && bin/kustomize build config/default > config/deploy/manifests.yaml
+	cd config/manager && \
+	export KUSTOMIZE_CMD=$$(ls ../../bin/kustomize*) && \
+	$$KUSTOMIZE_CMD edit set image controller=$(CONTROLLER_IMG) && \
+	$$KUSTOMIZE_CMD build ../../config/default > ../../config/deploy/manifests.yaml

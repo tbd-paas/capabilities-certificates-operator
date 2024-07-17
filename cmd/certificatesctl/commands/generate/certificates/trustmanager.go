@@ -32,7 +32,7 @@ import (
 	cmdgenerate "github.com/tbd-paas/capabilities-certificates-operator/cmd/certificatesctl/commands/generate"
 	// specific imports for workloads
 	v1alpha1trustmanager "github.com/tbd-paas/capabilities-certificates-operator/apis/certificates/v1alpha1/trustmanager"
-	//+kubebuilder:scaffold:operator-builder:imports
+	// +kubebuilder:scaffold:operator-builder:imports
 )
 
 // NewTrustManagerSubCommand creates a new command and adds it to its
@@ -75,7 +75,7 @@ func GenerateTrustManager(g *cmdgenerate.GenerateSubCommand) error {
 	type generateFunc func([]byte) ([]client.Object, error)
 	generateFuncMap := map[string]generateFunc{
 		"v1alpha1": v1alpha1trustmanager.GenerateForCLI,
-		//+kubebuilder:scaffold:operator-builder:versionmap
+		// +kubebuilder:scaffold:operator-builder:versionmap
 	}
 
 	generate := generateFuncMap[apiVersion]

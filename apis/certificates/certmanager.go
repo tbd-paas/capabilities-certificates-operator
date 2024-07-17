@@ -18,7 +18,7 @@ package certificates
 
 import (
 	v1alpha1certificates "github.com/tbd-paas/capabilities-certificates-operator/apis/certificates/v1alpha1"
-	//+kubebuilder:scaffold:operator-builder:imports
+	// +kubebuilder:scaffold:operator-builder:imports
 
 	"k8s.io/apimachinery/pkg/runtime/schema"
 )
@@ -27,6 +27,6 @@ import (
 func CertManagerGroupVersions() []schema.GroupVersion {
 	return []schema.GroupVersion{
 		v1alpha1certificates.GroupVersion,
-		//+kubebuilder:scaffold:operator-builder:groupversions
+		// +kubebuilder:scaffold:operator-builder:groupversions
 	}
 }

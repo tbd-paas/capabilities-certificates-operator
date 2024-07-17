@@ -26,7 +26,7 @@ import (
 
 	v1alpha1certmanager "github.com/tbd-paas/capabilities-certificates-operator/apis/certificates/v1alpha1/certmanager"
 	cmdinit "github.com/tbd-paas/capabilities-certificates-operator/cmd/certificatesctl/commands/init"
-	//+kubebuilder:scaffold:operator-builder:imports
+	// +kubebuilder:scaffold:operator-builder:imports
 )
 
 // getCertManagerManifest returns the sample CertManager manifest
@@ -40,7 +40,7 @@ func getCertManagerManifest(i *cmdinit.InitSubCommand) (string, error) {
 	// generate a map of all versions to samples for each api version created
 	manifestMap := map[string]string{
 		"v1alpha1": v1alpha1certmanager.Sample(i.RequiredOnly),
-		//+kubebuilder:scaffold:operator-builder:versionmap
+		// +kubebuilder:scaffold:operator-builder:versionmap
 	}
 
 	// return the manifest if it is not blank

@@ -191,9 +191,8 @@ func CreateDeploymentNamespaceTrustManager(
 							},
 						},
 						"nodeSelector": map[string]interface{}{
-							"kubernetes.io/os":   "linux",
-							"tbd.io/node-type":   "platform",
-							"kubernetes.io/arch": "arm64",
+							"kubernetes.io/os": "linux",
+							"tbd.io/node-type": "platform",
 						},
 						"volumes": []interface{}{
 							map[string]interface{}{

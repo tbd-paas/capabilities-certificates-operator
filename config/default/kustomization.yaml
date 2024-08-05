@@ -10,16 +10,13 @@ namePrefix: certificates-operator-
 
 # Labels to add to all resources and selectors.
 commonLabels:
-  app: certificates-operator
   app.kubernetes.io/name: certificates-operator
-  app.kubernetes.io/instance: manager
-  app.kubernetes.io/component: certificates-operator
-  app.kubernetes.io/version: v0.0.1
-  capabilities.tbd.io/capability: certificates
-  capabilities.tbd.io/version: v0.0.1
-  capabilities.tbd.io/platform-version: unstable
+  app.kubernetes.io/instance: default
+  app.kubernetes.io/component: controller
+  app.kubernetes.io/version: unstable
   app.kubernetes.io/part-of: platform
-  app.kubernetes.io/managed-by: platform-config-operator
+  capabilities.tbd.io/capability: certificates
+  capabilities.tbd.io/platform-version: unstable
 
 bases:
 - ../crd

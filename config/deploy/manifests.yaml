@@ -2,16 +2,14 @@ apiVersion: v1
 kind: Namespace
 metadata:
   labels:
-    app: certificates-operator
-    app.kubernetes.io/component: certificates-operator
-    app.kubernetes.io/instance: manager
-    app.kubernetes.io/managed-by: platform-config-operator
+    app.kubernetes.io/component: controller
+    app.kubernetes.io/instance: default
+    app.kubernetes.io/managed-by: kustomize
     app.kubernetes.io/name: certificates-operator
     app.kubernetes.io/part-of: platform
-    app.kubernetes.io/version: v0.0.1
+    app.kubernetes.io/version: unstable
     capabilities.tbd.io/capability: certificates
     capabilities.tbd.io/platform-version: unstable
-    capabilities.tbd.io/version: v0.0.1
     control-plane: controller-manager
   name: tbd-operators-system
 ---
@@ -21,16 +19,13 @@ metadata:
   annotations:
     controller-gen.kubebuilder.io/version: v0.15.0
   labels:
-    app: certificates-operator
-    app.kubernetes.io/component: certificates-operator
-    app.kubernetes.io/instance: manager
-    app.kubernetes.io/managed-by: platform-config-operator
+    app.kubernetes.io/component: controller
+    app.kubernetes.io/instance: default
     app.kubernetes.io/name: certificates-operator
     app.kubernetes.io/part-of: platform
-    app.kubernetes.io/version: v0.0.1
+    app.kubernetes.io/version: unstable
     capabilities.tbd.io/capability: certificates
     capabilities.tbd.io/platform-version: unstable
-    capabilities.tbd.io/version: v0.0.1
   name: certmanagers.certificates.platform.tbd.io
 spec:
   group: certificates.platform.tbd.io
@@ -291,16 +286,13 @@ metadata:
   annotations:
     controller-gen.kubebuilder.io/version: v0.15.0
   labels:
-    app: certificates-operator
-    app.kubernetes.io/component: certificates-operator
-    app.kubernetes.io/instance: manager
-    app.kubernetes.io/managed-by: platform-config-operator
+    app.kubernetes.io/component: controller
+    app.kubernetes.io/instance: default
     app.kubernetes.io/name: certificates-operator
     app.kubernetes.io/part-of: platform
-    app.kubernetes.io/version: v0.0.1
+    app.kubernetes.io/version: unstable
     capabilities.tbd.io/capability: certificates
     capabilities.tbd.io/platform-version: unstable
-    capabilities.tbd.io/version: v0.0.1
   name: trustmanagers.certificates.platform.tbd.io
 spec:
   group: certificates.platform.tbd.io
@@ -477,16 +469,14 @@ apiVersion: v1
 kind: ServiceAccount
 metadata:
   labels:
-    app: certificates-operator
-    app.kubernetes.io/component: certificates-operator
-    app.kubernetes.io/instance: manager
-    app.kubernetes.io/managed-by: platform-config-operator
+    app.kubernetes.io/component: controller
+    app.kubernetes.io/instance: default
+    app.kubernetes.io/managed-by: kustomize
     app.kubernetes.io/name: certificates-operator
     app.kubernetes.io/part-of: platform
-    app.kubernetes.io/version: v0.0.1
+    app.kubernetes.io/version: unstable
     capabilities.tbd.io/capability: certificates
     capabilities.tbd.io/platform-version: unstable
-    capabilities.tbd.io/version: v0.0.1
   name: certificates-operator-controller-manager
   namespace: tbd-operators-system
 ---
@@ -494,16 +484,14 @@ apiVersion: rbac.authorization.k8s.io/v1
 kind: Role
 metadata:
   labels:
-    app: certificates-operator
-    app.kubernetes.io/component: certificates-operator
-    app.kubernetes.io/instance: manager
-    app.kubernetes.io/managed-by: platform-config-operator
+    app.kubernetes.io/component: controller
+    app.kubernetes.io/instance: default
+    app.kubernetes.io/managed-by: kustomize
     app.kubernetes.io/name: certificates-operator
     app.kubernetes.io/part-of: platform
-    app.kubernetes.io/version: v0.0.1
+    app.kubernetes.io/version: unstable
     capabilities.tbd.io/capability: certificates
     capabilities.tbd.io/platform-version: unstable
-    capabilities.tbd.io/version: v0.0.1
   name: certificates-operator-leader-election-role
   namespace: tbd-operators-system
 rules:
@@ -543,16 +531,14 @@ apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
   labels:
-    app: certificates-operator
-    app.kubernetes.io/component: certificates-operator
-    app.kubernetes.io/instance: manager
-    app.kubernetes.io/managed-by: platform-config-operator
+    app.kubernetes.io/component: controller
+    app.kubernetes.io/instance: default
+    app.kubernetes.io/managed-by: kustomize
     app.kubernetes.io/name: certificates-operator
     app.kubernetes.io/part-of: platform
-    app.kubernetes.io/version: v0.0.1
+    app.kubernetes.io/version: unstable
     capabilities.tbd.io/capability: certificates
     capabilities.tbd.io/platform-version: unstable
-    capabilities.tbd.io/version: v0.0.1
   name: certificates-operator-certificates-certmanager-editor-role
 rules:
 - apiGroups:
@@ -578,16 +564,14 @@ apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
   labels:
-    app: certificates-operator
-    app.kubernetes.io/component: certificates-operator
-    app.kubernetes.io/instance: manager
-    app.kubernetes.io/managed-by: platform-config-operator
+    app.kubernetes.io/component: controller
+    app.kubernetes.io/instance: default
+    app.kubernetes.io/managed-by: kustomize
     app.kubernetes.io/name: certificates-operator
     app.kubernetes.io/part-of: platform
-    app.kubernetes.io/version: v0.0.1
+    app.kubernetes.io/version: unstable
     capabilities.tbd.io/capability: certificates
     capabilities.tbd.io/platform-version: unstable
-    capabilities.tbd.io/version: v0.0.1
   name: certificates-operator-certificates-certmanager-viewer-role
 rules:
 - apiGroups:
@@ -609,16 +593,14 @@ apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
   labels:
-    app: certificates-operator
-    app.kubernetes.io/component: certificates-operator
-    app.kubernetes.io/instance: manager
-    app.kubernetes.io/managed-by: platform-config-operator
+    app.kubernetes.io/component: controller
+    app.kubernetes.io/instance: default
+    app.kubernetes.io/managed-by: kustomize
     app.kubernetes.io/name: certificates-operator
     app.kubernetes.io/part-of: platform
-    app.kubernetes.io/version: v0.0.1
+    app.kubernetes.io/version: unstable
     capabilities.tbd.io/capability: certificates
     capabilities.tbd.io/platform-version: unstable
-    capabilities.tbd.io/version: v0.0.1
   name: certificates-operator-certificates-trustmanager-editor-role
 rules:
 - apiGroups:
@@ -644,16 +626,14 @@ apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
   labels:
-    app: certificates-operator
-    app.kubernetes.io/component: certificates-operator
-    app.kubernetes.io/instance: manager
-    app.kubernetes.io/managed-by: platform-config-operator
+    app.kubernetes.io/component: controller
+    app.kubernetes.io/instance: default
+    app.kubernetes.io/managed-by: kustomize
     app.kubernetes.io/name: certificates-operator
     app.kubernetes.io/part-of: platform
-    app.kubernetes.io/version: v0.0.1
+    app.kubernetes.io/version: unstable
     capabilities.tbd.io/capability: certificates
     capabilities.tbd.io/platform-version: unstable
-    capabilities.tbd.io/version: v0.0.1
   name: certificates-operator-certificates-trustmanager-viewer-role
 rules:
 - apiGroups:
@@ -675,16 +655,13 @@ apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
   labels:
-    app: certificates-operator
-    app.kubernetes.io/component: certificates-operator
-    app.kubernetes.io/instance: manager
-    app.kubernetes.io/managed-by: platform-config-operator
+    app.kubernetes.io/component: controller
+    app.kubernetes.io/instance: default
     app.kubernetes.io/name: certificates-operator
     app.kubernetes.io/part-of: platform
-    app.kubernetes.io/version: v0.0.1
+    app.kubernetes.io/version: unstable
     capabilities.tbd.io/capability: certificates
     capabilities.tbd.io/platform-version: unstable
-    capabilities.tbd.io/version: v0.0.1
   name: certificates-operator-manager-role
 rules:
 - apiGroups:
@@ -1184,16 +1161,14 @@ apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
 metadata:
   labels:
-    app: certificates-operator
-    app.kubernetes.io/component: certificates-operator
-    app.kubernetes.io/instance: manager
-    app.kubernetes.io/managed-by: platform-config-operator
+    app.kubernetes.io/component: controller
+    app.kubernetes.io/instance: default
+    app.kubernetes.io/managed-by: kustomize
     app.kubernetes.io/name: certificates-operator
     app.kubernetes.io/part-of: platform
-    app.kubernetes.io/version: v0.0.1
+    app.kubernetes.io/version: unstable
     capabilities.tbd.io/capability: certificates
     capabilities.tbd.io/platform-version: unstable
-    capabilities.tbd.io/version: v0.0.1
   name: certificates-operator-leader-election-rolebinding
   namespace: tbd-operators-system
 roleRef:
@@ -1209,16 +1184,14 @@ apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
 metadata:
   labels:
-    app: certificates-operator
-    app.kubernetes.io/component: certificates-operator
-    app.kubernetes.io/instance: manager
-    app.kubernetes.io/managed-by: platform-config-operator
+    app.kubernetes.io/component: controller
+    app.kubernetes.io/instance: default
+    app.kubernetes.io/managed-by: kustomize
     app.kubernetes.io/name: certificates-operator
     app.kubernetes.io/part-of: platform
-    app.kubernetes.io/version: v0.0.1
+    app.kubernetes.io/version: unstable
     capabilities.tbd.io/capability: certificates
     capabilities.tbd.io/platform-version: unstable
-    capabilities.tbd.io/version: v0.0.1
   name: certificates-operator-manager-rolebinding
 roleRef:
   apiGroup: rbac.authorization.k8s.io
@@ -1233,16 +1206,14 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    app: certificates-operator
-    app.kubernetes.io/component: certificates-operator
-    app.kubernetes.io/instance: manager
-    app.kubernetes.io/managed-by: platform-config-operator
+    app.kubernetes.io/component: controller
+    app.kubernetes.io/instance: default
+    app.kubernetes.io/managed-by: kustomize
     app.kubernetes.io/name: certificates-operator
     app.kubernetes.io/part-of: platform
-    app.kubernetes.io/version: v0.0.1
+    app.kubernetes.io/version: unstable
     capabilities.tbd.io/capability: certificates
     capabilities.tbd.io/platform-version: unstable
-    capabilities.tbd.io/version: v0.0.1
     control-plane: controller-manager
   name: certificates-operator-controller-manager
   namespace: tbd-operators-system
@@ -1250,32 +1221,26 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      app: certificates-operator
-      app.kubernetes.io/component: certificates-operator
-      app.kubernetes.io/instance: manager
-      app.kubernetes.io/managed-by: platform-config-operator
+      app.kubernetes.io/component: controller
+      app.kubernetes.io/instance: default
       app.kubernetes.io/name: certificates-operator
       app.kubernetes.io/part-of: platform
-      app.kubernetes.io/version: v0.0.1
+      app.kubernetes.io/version: unstable
       capabilities.tbd.io/capability: certificates
       capabilities.tbd.io/platform-version: unstable
-      capabilities.tbd.io/version: v0.0.1
       control-plane: controller-manager
   template:
     metadata:
       annotations:
         kubectl.kubernetes.io/default-container: manager
       labels:
-        app: certificates-operator
-        app.kubernetes.io/component: certificates-operator
-        app.kubernetes.io/instance: manager
-        app.kubernetes.io/managed-by: platform-config-operator
+        app.kubernetes.io/component: controller
+        app.kubernetes.io/instance: default
         app.kubernetes.io/name: certificates-operator
         app.kubernetes.io/part-of: platform
-        app.kubernetes.io/version: v0.0.1
+        app.kubernetes.io/version: unstable
         capabilities.tbd.io/capability: certificates
         capabilities.tbd.io/platform-version: unstable
-        capabilities.tbd.io/version: v0.0.1
         control-plane: controller-manager
     spec:
       affinity:

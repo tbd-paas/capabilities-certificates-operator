@@ -988,6 +988,14 @@ rules:
 - apiGroups:
   - ""
   resources:
+  - endpoints
+  verbs:
+  - get
+  - list
+  - watch
+- apiGroups:
+  - ""
+  resources:
   - events
   verbs:
   - create
@@ -1271,6 +1279,23 @@ spec:
         control-plane: controller-manager
     spec:
       affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: kubernetes.io/arch
+                operator: In
+                values:
+                - amd64
+                - arm64
+              - key: kubernetes.io/os
+                operator: In
+                values:
+                - linux
+              - key: tbd.io/node-type
+                operator: In
+                values:
+                - platform
         podAntiAffinity:
           preferredDuringSchedulingIgnoredDuringExecution:
           - podAffinityTerm:
@@ -1339,9 +1364,6 @@ spec:
             drop:
             - ALL
           readOnlyRootFilesystem: true
-      nodeSelector:
-        kubernetes.io/os: linux
-        tbd.io/node-type: platform
       securityContext:
         fsGroup: 1001
         runAsGroup: 1001
